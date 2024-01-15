@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
 
+
     @GetMapping("/kakao")
     public void kakaoCallback(@RequestParam("code") String code) {
         log.info("code : " + code);

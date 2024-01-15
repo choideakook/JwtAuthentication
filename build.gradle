@@ -24,6 +24,7 @@ repositories {
 
 ext {
     set('snippetsDir', file("build/generated-snippets"))
+    set('springCloudVersion', "2022.0.2")
 }
 
 configurations {
@@ -31,6 +32,12 @@ configurations {
         extendsFrom annotationProcessor
     }
     asciidoctorExt
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 dependencies {
@@ -49,6 +56,9 @@ dependencies {
 
     // lombok
     annotationProcessor 'org.projectlombok:lombok'
+
+    //feign
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
