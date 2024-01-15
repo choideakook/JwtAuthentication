@@ -1,9 +1,7 @@
-package com.atowz.member.doamin;
+package com.atowz.member.doamin.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.atowz.member.doamin.entity.Gender;
-import com.atowz.member.doamin.entity.Interview;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -17,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEmbeddableSerializer")
 public class QInterview extends BeanPath<Interview> {
 
-    private static final long serialVersionUID = 844177927L;
+    private static final long serialVersionUID = 865391024L;
 
     public static final QInterview interview = new QInterview("interview");
 

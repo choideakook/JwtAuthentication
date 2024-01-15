@@ -23,7 +23,7 @@ spring:
             scope: account_email, profile_nickname, profile_image, openid
             client-name: Kakao
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: http://localhost:8080/api/auth/kakao
             client-authentication-method: POST
         provider:
           kakao:

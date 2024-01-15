@@ -1,8 +1,7 @@
-package com.atowz.member.doamin;
+package com.atowz.member.doamin.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.atowz.member.doamin.entity.Exam;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -16,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEmbeddableSerializer")
 public class QExam extends BeanPath<Exam> {
 
-    private static final long serialVersionUID = -1059017767L;
+    private static final long serialVersionUID = 917902992L;
 
     public static final QExam exam = new QExam("exam");
 

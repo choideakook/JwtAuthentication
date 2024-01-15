@@ -1,9 +1,7 @@
-package com.atowz.member.doamin;
+package com.atowz.member.doamin.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.atowz.member.doamin.entity.Member;
-import com.atowz.member.doamin.entity.MemberStatus;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -18,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QMember extends EntityPathBase<Member> {
 
-    private static final long serialVersionUID = 403011540L;
+    private static final long serialVersionUID = 1848316107L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 

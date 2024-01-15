@@ -1,8 +1,7 @@
-package com.atowz.member.doamin;
+package com.atowz.member.doamin.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.atowz.member.doamin.entity.MyProfile;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -16,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEmbeddableSerializer")
 public class QMyProfile extends BeanPath<MyProfile> {
 
-    private static final long serialVersionUID = -1616057629L;
+    private static final long serialVersionUID = -1594844532L;
 
     public static final QMyProfile myProfile = new QMyProfile("myProfile");
 
