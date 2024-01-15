@@ -2,6 +2,8 @@ package com.atowz.member.doamin;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.atowz.member.doamin.entity.Gender;
+import com.atowz.member.doamin.entity.Interview;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
