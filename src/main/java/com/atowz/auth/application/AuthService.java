@@ -31,7 +31,7 @@ public class AuthService {
     public UserResDto getUser(String atk) {
         KakaoUserResDto resDto = userClient.getUser("Bearer " + atk);
         UserResDto userDto = resDto.getProperties();
-        userDto.setId(resDto.getId());
+        userDto.setId(String.valueOf(resDto.getId()));
         return userDto;
     }
 }

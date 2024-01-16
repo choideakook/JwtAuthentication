@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UserResDto {
 
-    private Long id;
+    private String id;
     private String nickname;
     private String profile_image;
 }
