@@ -20,4 +20,14 @@ public class MemberQueryServiceImp implements MemberQueryService {
     public Optional<Member> byUsername(String username) {
         return memberJpaRepository.findByUsername(username);
     }
+
+    @Override
+    public Member byId(Long memberId) {
+        Optional<Member> byId = memberJpaRepository.findById(memberId);
+
+        if (byId.isPresent())
+            return byId.get();
+
+        throw new IllegalArgumentException("존재하지 않는 id");
+    }
 }

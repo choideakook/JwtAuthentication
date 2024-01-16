@@ -6,17 +6,13 @@ import com.atowz.global.jwt.JwtService;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -43,10 +39,19 @@ public class AuthController {
         Member member = getMember(user);
 
         HttpHeaders headers = jwtService.createAtkInHeader(member.getId());
-        String rtk = jwtService.createRtkInCookie(member.getId());
-        headers.add(HttpHeaders.SET_COOKIE, "refreshToken=" + rtk + "; Path=/; Max-Age=" + (24 * 60 * 60 * 7));
+        String rtk = jwtService.createRtk(member.getUsername());
+        headers.add(
+                HttpHeaders.SET_COOKIE,
+                "refreshToken=" + rtk +
+                        "; Path=/; Max-Age=" + (24 * 60 * 60 * 7));
 
         return ResponseEntity.noContent().headers(headers).build();
+    }
+
+
+    @GetMapping("/access-token")
+    public ResponseEntity reissueToken(HttpServletRequest request) {
+        request.getCookies()
     }
 
     private Member getMember(UserResDto user) {

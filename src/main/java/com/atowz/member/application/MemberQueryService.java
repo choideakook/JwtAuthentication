@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface MemberQueryService {
 
     Optional<Member> byUsername(String username);
+
+    Member byId(Long memberId);
 }
