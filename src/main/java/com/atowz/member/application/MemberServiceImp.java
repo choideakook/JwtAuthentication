@@ -26,7 +26,7 @@ public class MemberServiceImp implements MemberService {
         while (true) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 7; i++)
-                sb.append(Math.random() * 10);
+                sb.append((int) (Math.random() * 10));
 
             if (!memberJpaRepository.existsByRecommendCode(sb.toString()))
                 return sb.toString();

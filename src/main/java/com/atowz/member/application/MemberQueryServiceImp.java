@@ -17,12 +17,7 @@ public class MemberQueryServiceImp implements MemberQueryService {
     private final MemberJpaRepository memberJpaRepository;
 
     @Override
-    public Member byUsername(String username) {
-        Optional<Member> byUsername = memberJpaRepository.findByUsername(username);
-
-        if (byUsername.isPresent())
-            return byUsername.get();
-
-        throw new IllegalArgumentException("존재하지 않는 username");
+    public Optional<Member> byUsername(String username) {
+        return memberJpaRepository.findByUsername(username);
     }
 }

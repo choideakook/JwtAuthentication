@@ -2,7 +2,9 @@ package com.atowz.member.application;
 
 import com.atowz.member.doamin.entity.Member;
 
+import java.util.Optional;
+
 public interface MemberQueryService {
 
-    Member byUsername(String username);
+    Optional<Member> byUsername(String username);
 }

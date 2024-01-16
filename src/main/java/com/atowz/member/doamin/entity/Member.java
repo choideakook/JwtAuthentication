@@ -31,6 +31,7 @@ public class Member {
     private String recommendCode;
     private int recommendCount;
 
+    @Builder.Default
     @ElementCollection
     @CollectionTable(name = "member_profile_img", joinColumns = @JoinColumn(name = "member_id"))
     private List<String> profileImg = new ArrayList<>();
