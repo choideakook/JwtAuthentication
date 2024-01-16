@@ -1,5 +1,4 @@
 kakao:
-
   feign:
     token_url: https://kauth.kakao.com
     user_url: https://kapi.kakao.com
@@ -29,25 +28,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-
-  security:
-    oauth2:
-      client:
-        registration:
-          kakao:
-            clientId: ENC(nSHuT06UivSKWOPYZHFZJX3XqZb4PXGR49w0DlLeb8uWlUbSRP240bslBfat/T2G)
-            client-secret: ENC(FtBWbVxrBZx+uPJNtplfoOfH8qVeOaP8fnqn478fV6EoT4+AMihBMdr77bznFQ+2)
-            scope: account_email, profile_nickname, profile_image, openid
-            client-name: Kakao
-            authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/api/auth/kakao
-            client-authentication-method: POST
-        provider:
-          kakao:
-            authorization-uri: https://kauth.kakao.com/oauth/authorize
-            token-uri: https://kauth.kakao.com/oauth/token
-            user-info-uri: https://kapi.kakao.com/v2/user/me
-            user-name-attribute: id
 
     properties:
       hibernate:

@@ -21,3 +21,10 @@ jasypt:
 jwt:
   secret: fortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortest
   expiration-period: 10000
+
+kakao:
+  feign:
+    token_url: https://kauth.kakao.com
+    user_url: https://kapi.kakao.com
+    req_token: /oauth/token
+    req_user: /v2/user/me

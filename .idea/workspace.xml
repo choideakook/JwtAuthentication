@@ -32,6 +32,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -62,6 +63,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "dk",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -79,11 +82,17 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.atowz.global.jwt" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.atowz.global.feign.client" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AtowzApplication">
+  <component name="RunManager" selected="JUnit.JwtProviderTest">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="atowz" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -108,6 +117,40 @@
       <module name="atowz.test" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JwtProviderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="atowz.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.atowz.global.jwt.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.atowz.global.jwt" />
+      <option name="MAIN_CLASS_NAME" value="com.atowz.global.jwt.JwtProviderTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=atwoz" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JwtProviderTest.no1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="atowz.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.atowz.global.jwt.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.atowz.global.jwt" />
+      <option name="MAIN_CLASS_NAME" value="com.atowz.global.jwt.JwtProviderTest" />
+      <option name="METHOD_NAME" value="no1" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=atwoz" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -210,11 +253,15 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.JwtProviderTest" />
+      <item itemvalue="JUnit.JwtProviderTest.no1" />
       <item itemvalue="JUnit.All in atowz.test" />
       <item itemvalue="Spring Boot.AtowzApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.JwtProviderTest" />
+        <item itemvalue="JUnit.JwtProviderTest.no1" />
         <item itemvalue="JUnit.All in atowz.test" />
       </list>
     </recent_temporary>
