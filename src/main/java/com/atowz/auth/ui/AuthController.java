@@ -71,6 +71,7 @@ public class AuthController {
     }
 
 
+
     private HttpHeaders getHeaders(Member member) {
         HttpHeaders headers = jwtService.createAtkInHeader(member.getId());
         String rtk = jwtService.createRtk(member.getUsername());

@@ -45,14 +45,19 @@ public class JwtProvider {
     }
 
     public Map<String, Object> getClaims(String token) {
-        String body = Jwts.parserBuilder()
-                .setSigningKey(getSecretKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .get("body", String.class);
+        try {
+            String body = Jwts.parserBuilder()
+                    .setSigningKey(getSecretKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .get("body", String.class);
 
-        return strToMap(body);
+            return strToMap(body);
+
+        } catch (Exception e) {
+            throw new IllegalStateException("유효하지 않은 token.");
+        }
     }
 
     private Object jsonToStr(Map<String, Object> claims) {

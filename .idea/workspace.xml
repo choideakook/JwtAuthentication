@@ -81,6 +81,9 @@
     ]
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -93,7 +96,7 @@
       <recent name="com.atowz.global.feign.client" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AtowzApplication">
+  <component name="RunManager" selected="JUnit.All in atowz.test (2)">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="atowz" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,6 +116,28 @@
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
       <method v="2" />
+    </configuration>
+    <configuration name="All in atowz.test (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="atowz.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=atwoz" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in atowz.test (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="atowz.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=atwoz" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="All in atowz.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="atowz.test" />
@@ -254,6 +279,8 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.All in atowz.test (1)" />
+      <item itemvalue="JUnit.All in atowz.test (2)" />
       <item itemvalue="JUnit.JwtProviderTest" />
       <item itemvalue="JUnit.JwtProviderTest.no1" />
       <item itemvalue="JUnit.All in atowz.test" />
@@ -261,6 +288,8 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in atowz.test (2)" />
+        <item itemvalue="JUnit.All in atowz.test (1)" />
         <item itemvalue="JUnit.JwtProviderTest" />
         <item itemvalue="JUnit.JwtProviderTest.no1" />
         <item itemvalue="JUnit.All in atowz.test" />
