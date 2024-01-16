@@ -1,8 +1,11 @@
 package com.atowz.auth.application;
 
 import com.atowz.auth.application.dto.KakaoTokenReqDto;
-import com.atowz.global.feign.client.KakaoClient;
+import com.atowz.global.feign.client.KakaoTokenClient;
+import com.atowz.global.feign.client.KakaoUserClient;
 import com.atowz.global.feign.dto.response.KakaoTokenResDto;
+import com.atowz.global.feign.dto.response.KakaoUserResDto;
+import com.atowz.global.feign.dto.response.UserResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +18,20 @@ public class AuthService {
 
     @Autowired
     private KakaoTokenReqDto reqDto;
-    private final KakaoClient kakaoClient;
+    private final KakaoTokenClient tokenClient;
+    private final KakaoUserClient userClient;
 
     public String getToken(String code) {
         reqDto.setCode(code);
 
-        KakaoTokenResDto resDto = kakaoClient.getToken(reqDto);
+        KakaoTokenResDto resDto = tokenClient.getToken(reqDto);
         return resDto.getAccess_token();
+    }
+
+    public UserResDto getUser(String atk) {
+        KakaoUserResDto resDto = userClient.getUser("Bearer " + atk);
+        UserResDto userDto = resDto.getProperties();
+        userDto.setId(resDto.getId());
+        return userDto;
     }
 }

@@ -78,6 +78,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.atowz.global.feign.client" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.AtowzApplication">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="atowz" />

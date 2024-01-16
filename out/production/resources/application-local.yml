@@ -1,8 +1,10 @@
 kakao:
 
   feign:
-    url: https://kauth.kakao.com
+    token_url: https://kauth.kakao.com
+    user_url: https://kapi.kakao.com
     req_token: /oauth/token
+    req_user: /v2/user/me
 
   req:
     grant_type: authorization_code

@@ -1,6 +1,7 @@
 package com.atowz.auth.ui;
 
 import com.atowz.auth.application.AuthService;
+import com.atowz.global.feign.dto.response.UserResDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,5 +24,8 @@ public class AuthController {
 
         String accessToken = authService.getToken(code);
         log.info(("ATK : " + accessToken));
+
+        UserResDto user = authService.getUser(accessToken);
+        log.info("user id : " + user.getId()  + "nickname : " + user.getNickname() + "img : " + user.getProfile_image());
     }
 }
