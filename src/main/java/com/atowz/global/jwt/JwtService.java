@@ -3,14 +3,15 @@ package com.atowz.global.jwt;
 import com.atowz.global.redis.RedisUtil;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.doamin.entity.Member;
+import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -46,7 +47,40 @@ public class JwtService {
     }
 
     public Member getMember(String accessToken) {
+        String value = redisUtil.getValue(accessToken);
+
+        if (value.equals("is expired"))
+            throw new IllegalArgumentException("만료된 access token.");
+
         Long memberId = (Long) jwtProvider.getClaims(accessToken).get("memberId");
         return memberQueryService.byId(memberId);
+    }
+
+    public String getRefreshToken(Cookie[] cookies) {
+        for (Cookie cookie : cookies)
+            if ("refreshToken".equals(cookie.getName()))
+                return cookie.getValue();
+
+        throw new IllegalArgumentException("refresh token 이 없음.");
+    }
+
+    public Member getMemberByRtk(String refreshToken) {
+        String username = (String) jwtProvider.getClaims(refreshToken).get("username");
+        String value = redisUtil.getValue(username);
+
+        if (!refreshToken.equals(value))
+            throw new IllegalArgumentException("유효하지 않는 refresh token.");
+
+        Optional<Member> byUsername = memberQueryService.byUsername(username);
+
+        if (byUsername.isPresent())
+            return byUsername.get();
+
+        throw new IllegalStateException("존재하지 않는 username.");
+    }
+
+    public void expireToken(String accessToken, String refreshToken) {
+        redisUtil.setData(accessToken, "is expired", ATK_EXPIRED_IN);
+        redisUtil.deleteData((String) jwtProvider.getClaims(refreshToken).get("username"));
     }
 }
