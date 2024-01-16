@@ -1,7 +1,6 @@
 package com.atowz.global.feign.client;
 
-import com.atowz.global.feign.dto.response.KakaoUserResDto;
-import feign.Param;
+import com.atowz.global.feign.dto.KakaoUserResDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

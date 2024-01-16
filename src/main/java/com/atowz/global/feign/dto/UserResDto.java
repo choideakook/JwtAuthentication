@@ -1,4 +1,4 @@
-package com.atowz.global.feign.dto.response;
+package com.atowz.global.feign.dto;
 
 import lombok.Data;
 

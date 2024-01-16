@@ -1,7 +1,7 @@
 package com.atowz.auth.ui;
 
 import com.atowz.auth.application.AuthService;
-import com.atowz.global.feign.dto.response.UserResDto;
+import com.atowz.global.feign.dto.UserResDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
