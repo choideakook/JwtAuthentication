@@ -49,11 +49,12 @@ public class JwtService {
     public Member getMember(String accessToken) {
         String value = redisUtil.getValue(accessToken);
 
-        if (value.equals("is expired"))
-            throw new IllegalArgumentException("만료된 access token.");
+        if (value == null) {
+            Long memberId = (long) (Integer) jwtProvider.getClaims(accessToken).get("memberId");
+            return memberQueryService.byId(memberId);
+        }
 
-        Long memberId = (Long) jwtProvider.getClaims(accessToken).get("memberId");
-        return memberQueryService.byId(memberId);
+        throw new IllegalArgumentException("만료된 access token.");
     }
 
     public String getRefreshToken(Cookie[] cookies) {

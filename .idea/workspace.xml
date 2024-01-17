@@ -31,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -97,7 +97,7 @@
       <recent name="com.atowz.global.feign.client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AuthControllerKakaoLoginTest">
+  <component name="RunManager" selected="JUnit.All in atowz.test">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="atowz" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -118,18 +118,7 @@
       <option name="OPTIONS" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="All in atowz.test (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="atowz.test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=atwoz" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in atowz.test (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in atowz.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="atowz.test" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="" />
@@ -174,7 +163,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthControllerKakaoLoginTest.no2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthControllerLogoutTest.no1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="atowz.test" />
       <extension name="coverage">
         <pattern>
@@ -183,7 +172,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.atowz.auth.ui" />
-      <option name="MAIN_CLASS_NAME" value="com.atowz.auth.ui.AuthControllerKakaoLoginTest" />
+      <option name="MAIN_CLASS_NAME" value="com.atowz.auth.ui.AuthControllerLogoutTest" />
+      <option name="METHOD_NAME" value="no1" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=atwoz" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthControllerLogoutTest.no2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="atowz.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.atowz.auth.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.atowz.auth.ui" />
+      <option name="MAIN_CLASS_NAME" value="com.atowz.auth.ui.AuthControllerLogoutTest" />
       <option name="METHOD_NAME" value="no2" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=atwoz" />
@@ -289,20 +295,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.All in atowz.test (1)" />
-      <item itemvalue="JUnit.All in atowz.test (2)" />
       <item itemvalue="JUnit.AuthControllerKakaoLoginTest" />
       <item itemvalue="JUnit.AuthControllerKakaoLoginTest.no1" />
-      <item itemvalue="JUnit.AuthControllerKakaoLoginTest.no2" />
+      <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
+      <item itemvalue="JUnit.AuthControllerLogoutTest.no2" />
+      <item itemvalue="JUnit.All in atowz.test" />
       <item itemvalue="Spring Boot.AtowzApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AuthControllerKakaoLoginTest" />
-        <item itemvalue="JUnit.AuthControllerKakaoLoginTest.no2" />
+        <item itemvalue="JUnit.All in atowz.test" />
+        <item itemvalue="JUnit.AuthControllerLogoutTest.no2" />
+        <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
         <item itemvalue="JUnit.AuthControllerKakaoLoginTest.no1" />
-        <item itemvalue="JUnit.All in atowz.test (2)" />
-        <item itemvalue="JUnit.All in atowz.test (1)" />
+        <item itemvalue="JUnit.AuthControllerKakaoLoginTest" />
       </list>
     </recent_temporary>
   </component>

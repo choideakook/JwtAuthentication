@@ -5,39 +5,33 @@ import com.atowz.global.jwt.JwtService;
 import com.atowz.global.redis.RedisUtil;
 import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
+import jakarta.servlet.http.Cookie;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@DisplayName("통합 : kakao api 인증")
+@DisplayName("통합 : logout")
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-class AuthControllerKakaoLoginTest extends KakaoClientMock{
+class AuthControllerLogoutTest {
 
     @Autowired MockMvc mvc;
     @Autowired RedisUtil redisUtil;
     @Autowired JwtService jwtService;
     @Autowired MemberService memberService;
-
-    @BeforeEach
-    void setup() {
-        requestUserMocking();
-        requestTokenMocking();
-    }
 
     @AfterEach
     void rollback() {
@@ -45,51 +39,39 @@ class AuthControllerKakaoLoginTest extends KakaoClientMock{
     }
 
     @Test
-    @DisplayName("kakao api 로 회원가입 성공")
+    @DisplayName("logout 성공")
     void no1() throws Exception {
-        ResultActions result = mvc.perform(MockMvcRequestBuilders
-                .get("/api/auth/kakao")
-                .contentType(APPLICATION_JSON)
-                .param("code", "auth Code")
-        ).andDo(print());
-
-
-        result.andExpect(status().is2xxSuccessful())
-                .andExpect(cookie().exists("refreshToken"))
-                .andExpect(header().exists("accessToken"));
-
-        String refreshToken = redisUtil.getValue("1234");
-        assertThat(refreshToken).isNotEmpty();
-    }
-
-    @Test
-    @DisplayName("kakao api 로 로그인 성공")
-    void no2() throws Exception {
         Member member = createMember();
-        redisUtil.setData("1234", "old refresh token", (1000L * 60 * 60 * 24) * 7);
+        HttpHeaders headers = getHeader(member.getId());
+        Cookie cookie = getCookie(member.getUsername());
 
         ResultActions result = mvc.perform(MockMvcRequestBuilders
-                .get("/api/auth/kakao")
+                .get("/api/auth/logout")
                 .contentType(APPLICATION_JSON)
-                .param("code", "auth Code")
+                .headers(headers)
+                .cookie(cookie)
         ).andDo(print());
 
-
-        result.andExpect(status().is2xxSuccessful())
-                .andExpect(cookie().exists("refreshToken"))
-                .andExpect(header().exists("accessToken"));
-
-        String refreshToken = redisUtil.getValue("1234");
-        assertThat(refreshToken).isNotEqualTo("old refresh token");
+        result.andExpect(status().is2xxSuccessful());
     }
-
 
     private Member createMember() {
         return memberService.createMember(
                 new UserResDto(
                         "1234",
                         "user1",
-                        "img")
-        );
+                        "img"));
+    }
+
+    private HttpHeaders getHeader(Long memberId) {
+        HttpHeaders headers = jwtService.createAtkInHeader(memberId);
+        headers.add("Authorization", headers.getFirst("accessToken"));
+        return headers;
+    }
+
+    private Cookie getCookie(String username) {
+        String rtk = jwtService.createRtk(username);
+        redisUtil.setData(username, rtk, (1000L * 60 * 60 * 24) * 7);
+        return new Cookie("refreshToken", rtk);
     }
 }
