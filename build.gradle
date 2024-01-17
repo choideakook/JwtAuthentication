@@ -97,6 +97,11 @@ clean.doLast {
     file(generated).deleteDir()
 }
 
+clean {
+    delete file('src/main/generated')
+}
+
+
 tasks.named('test') {
     outputs.dir snippetsDir
     useJUnitPlatform()
