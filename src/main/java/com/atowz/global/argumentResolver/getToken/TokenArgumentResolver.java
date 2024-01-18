@@ -1,6 +1,7 @@
-package com.atowz.global.feign.argumentResolver.refreshToken;
+package com.atowz.global.argumentResolver.getToken;
 
-import com.atowz.member.doamin.entity.Member;
+import com.atowz.auth.domain.dto.TokenReqDto;
+import com.atowz.global.argumentResolver.refreshTokenToMember.RefreshTokenToMember;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -10,16 +11,19 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
-public class RefreshTokenArgumentResolver implements HandlerMethodArgumentResolver {
+public class TokenArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(RefreshTokenAuthorization.class);
+        return parameter.hasParameterAnnotation(RefreshTokenToMember.class);
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-        return (Member) request.getAttribute("member");
+        String accessToken = request.getHeader("Authorization");
+        String refreshToken = (String) request.getAttribute("refreshToken");
+
+        return new TokenReqDto(accessToken, refreshToken);
     }
 }

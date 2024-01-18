@@ -1,4 +1,4 @@
-package com.atowz.global.feign.argumentResolver.accessToken;
+package com.atowz.global.argumentResolver.accessTokenToMember;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,13 +18,12 @@ public class AccessTokenArgumentResolver implements HandlerMethodArgumentResolve
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(AccessTokenAuthorization.class);
+        return parameter.hasParameterAnnotation(AccessTokenToMember.class);
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-
         String accessToken = request.getHeader("Authorization");
         return jwtService.getMember(accessToken);
     }

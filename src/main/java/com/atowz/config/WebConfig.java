@@ -1,7 +1,7 @@
 package com.atowz.config;
 
-import com.atowz.global.feign.argumentResolver.accessToken.AccessTokenArgumentResolver;
-import com.atowz.global.feign.argumentResolver.refreshToken.RefreshTokenArgumentResolver;
+import com.atowz.global.argumentResolver.accessTokenToMember.AccessTokenArgumentResolver;
+import com.atowz.global.argumentResolver.refreshTokenToMember.RefreshTokenArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

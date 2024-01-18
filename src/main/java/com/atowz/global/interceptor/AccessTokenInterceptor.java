@@ -1,8 +1,6 @@
-package com.atowz.global.feign.interceptor;
+package com.atowz.global.interceptor;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
-import com.atowz.member.doamin.entity.Member;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,29 +12,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class RefreshTokenInterceptor implements HandlerInterceptor {
+public class AccessTokenInterceptor implements HandlerInterceptor {
 
     private final JwtService jwtService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Cookie[] cookies = request.getCookies();
-        String refreshToken = getRefreshToken(cookies);
-        Member member = jwtService.getMemberAndValidationCheck(refreshToken);
+        String accessToken = request.getHeader("Authorization");
 
-        request.setAttribute("member", member);
-        log.info("refresh token 유효성 검사 완료");
+        if (accessToken != null) {
+            jwtService.isAccessTokenValid(accessToken);
+        }
+
         return true;
     }
-
-    public String getRefreshToken(Cookie[] cookies) {
-        for (Cookie cookie : cookies)
-            if ("refreshToken".equals(cookie.getName()))
-                return cookie.getValue();
-
-        throw new IllegalArgumentException("refresh token 이 없음.");
-    }
-
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {

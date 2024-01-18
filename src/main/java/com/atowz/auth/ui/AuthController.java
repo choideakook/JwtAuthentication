@@ -1,7 +1,10 @@
 package com.atowz.auth.ui;
 
 import com.atowz.auth.domain.AuthService;
-import com.atowz.global.feign.argumentResolver.refreshToken.RefreshTokenAuthorization;
+import com.atowz.auth.domain.dto.TokenReqDto;
+import com.atowz.global.argumentResolver.accessTokenToMember.AccessTokenToMember;
+import com.atowz.global.argumentResolver.getToken.GetToken;
+import com.atowz.global.argumentResolver.refreshTokenToMember.RefreshTokenToMember;
 import com.atowz.global.feign.dto.UserResDto;
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.member.application.MemberQueryService;
@@ -15,9 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RestController
-@RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@RequestMapping("/api/auth")
+@RestController
 public class AuthController {
 
 
@@ -45,7 +48,7 @@ public class AuthController {
 
 
     @GetMapping("/reissue-token")
-    public ResponseEntity reissueToken(@RefreshTokenAuthorization Member member) {
+    public ResponseEntity reissueToken(@RefreshTokenToMember Member member) {
         log.info("token 재발급 요청 확인");
 
         HttpHeaders headers = jwtService.createTokenInHeader(member);
@@ -57,15 +60,10 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity logout(
-            @RequestHeader("Authorization") String accessToken,
-            HttpServletRequest request
-    ) {
+    public ResponseEntity logout(@GetToken TokenReqDto tokenDto, @AccessTokenToMember Member member) {
         log.info("logout 요청 확인");
 
-        String refreshToken = jwtService.getRefreshToken(request.getCookies());
-        Member member = jwtService.getMember(accessToken);
-        jwtService.expireToken(accessToken, refreshToken);
+        jwtService.expireToken(tokenDto);
 
         log.info("logout 완료 / member id = {}", member.getId());
         return ResponseEntity.noContent()

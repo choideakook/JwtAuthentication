@@ -1,8 +1,8 @@
 package com.atowz.config;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
-import com.atowz.global.feign.interceptor.AccessTokenInterceptor;
-import com.atowz.global.feign.interceptor.RefreshTokenInterceptor;
+import com.atowz.global.interceptor.AccessTokenInterceptor;
+import com.atowz.global.interceptor.RefreshTokenInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
