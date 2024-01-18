@@ -57,6 +57,17 @@ public class JwtService {
         throw new IllegalArgumentException("만료된 access token.");
     }
 
+    public void isValid(String accessToken) {
+        if (accessToken == null)
+            throw new IllegalArgumentException("Authorization 이 없음");
+
+        String value = redisUtil.getValue(accessToken);
+
+        if (value != null) {
+            throw new IllegalArgumentException("만료된 access token.");
+        }
+    }
+
     public String getRefreshToken(Cookie[] cookies) {
         for (Cookie cookie : cookies)
             if ("refreshToken".equals(cookie.getName()))
