@@ -37,7 +37,7 @@ public class AuthController {
 
         UserResDto user = authService.getUser(accessToken);
         Member member = getMember(user);
-        HttpHeaders headers = getHeaders(member);
+        HttpHeaders headers = jwtService.createTokenInHeader(member);
 
         log.info("login 성공 / member id = {}", member.getId());
         return ResponseEntity.noContent()
@@ -52,7 +52,7 @@ public class AuthController {
 
         String refreshToken = jwtService.getRefreshToken(request.getCookies());
         Member member = jwtService.getMemberByRefreshToken(refreshToken);
-        HttpHeaders headers = getHeaders(member);
+        HttpHeaders headers = jwtService.createTokenInHeader(member);
 
         log.info("token 재발급 성공 / member id = {}", member.getId());
         return ResponseEntity.noContent()
@@ -74,24 +74,6 @@ public class AuthController {
         log.info("logout 완료 / member id = {}", member.getId());
         return ResponseEntity.noContent()
                 .build();
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity interceptorTest(@JwtAuthorization String success) {
-        log.info("요청 확인 member id = {}", success);
-        return ResponseEntity.noContent()
-                .build();
-    }
-
-
-    private HttpHeaders getHeaders(Member member) {
-        HttpHeaders headers = jwtService.createAccessTokenInHeader(member.getId());
-        String refreshToken = jwtService.createRefreshToken(member.getUsername());
-        headers.add(
-                HttpHeaders.SET_COOKIE,
-                "refreshToken=" + refreshToken +
-                        "; Path=/; Max-Age=" + (24 * 60 * 60 * 7));
-        return headers;
     }
 
     private Member getMember(UserResDto user) {

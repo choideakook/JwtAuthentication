@@ -26,15 +26,24 @@ public class JwtService {
     private final long REFRESH_TOKEN_EXPIRED_IN = (1000L * 60 * 60 * 24) * 7; // 7 일
 
 
-    public HttpHeaders createAccessTokenInHeader(Long memberId) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("memberId", memberId);
-
-        String accessToken = jwtProvider.getToken(claims, ACCESS_TOKEN_EXPIRED_IN);
+    public HttpHeaders createTokenInHeader(Member member) {
+        String accessToken = createAccessToken(member.getId());
+        String refreshToken = createRefreshToken(member.getUsername());
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("accessToken", accessToken);
+        headers.add(
+                HttpHeaders.SET_COOKIE,
+                "refreshToken=" + refreshToken +
+                        "; Path=/; Max-Age=" + REFRESH_TOKEN_EXPIRED_IN);
         return headers;
+    }
+
+    public String createAccessToken(Long memberId) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("memberId", memberId);
+
+        return jwtProvider.getToken(claims, ACCESS_TOKEN_EXPIRED_IN);
     }
 
     public String createRefreshToken(String username) {
