@@ -13,13 +13,14 @@ import java.util.List;
 import static com.atowz.member.doamin.entity.MemberStatus.MEMBER;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
 @Builder(toBuilder = true)
 @NoArgsConstructor(access = PROTECTED)
-@AllArgsConstructor(access = PROTECTED)
+@AllArgsConstructor(access = PRIVATE)
 public class Member {
 
     @Id
