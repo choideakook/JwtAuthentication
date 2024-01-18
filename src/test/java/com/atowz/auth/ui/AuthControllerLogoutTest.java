@@ -42,7 +42,7 @@ class AuthControllerLogoutTest {
     @DisplayName("logout 성공")
     void no1() throws Exception {
         Member member = createMember();
-        HttpHeaders headers = getHeader(member.getId());
+        HttpHeaders headers = getHeader(member);
         Cookie cookie = getCookie(member.getUsername());
 
         ResultActions result = mvc.perform(MockMvcRequestBuilders
@@ -63,8 +63,8 @@ class AuthControllerLogoutTest {
                         "img"));
     }
 
-    private HttpHeaders getHeader(Long memberId) {
-        HttpHeaders headers = jwtService.createAccessTokenInHeader(memberId);
+    private HttpHeaders getHeader(Member member) {
+        HttpHeaders headers = jwtService.createTokenInHeader(member);
         headers.add("Authorization", headers.getFirst("accessToken"));
         return headers;
     }
