@@ -26,13 +26,13 @@ public class MemberServiceImp implements MemberService {
     private String getRecommendCode() {
         int recommendCodeLength = 8;
 
-        while (true) {
-            String recommendCode = UUID.randomUUID()
-                    .toString()
-                    .substring(0, recommendCodeLength);
+        String recommendCode = UUID.randomUUID()
+                .toString()
+                .substring(0, recommendCodeLength);
 
-            if (!memberJpaRepository.existsByRecommendCode(recommendCode))
-                return recommendCode;
-        }
+        if (memberJpaRepository.existsByRecommendCode(recommendCode))
+            return getRecommendCode();
+
+        return recommendCode;
     }
 }
