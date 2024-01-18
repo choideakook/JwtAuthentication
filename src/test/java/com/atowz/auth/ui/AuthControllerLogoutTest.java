@@ -64,13 +64,13 @@ class AuthControllerLogoutTest {
     }
 
     private HttpHeaders getHeader(Long memberId) {
-        HttpHeaders headers = jwtService.createAtkInHeader(memberId);
+        HttpHeaders headers = jwtService.createAccessTokenInHeader(memberId);
         headers.add("Authorization", headers.getFirst("accessToken"));
         return headers;
     }
 
     private Cookie getCookie(String username) {
-        String rtk = jwtService.createRtk(username);
+        String rtk = jwtService.createRefreshToken(username);
         redisUtil.setData(username, rtk, (1000L * 60 * 60 * 24) * 7);
         return new Cookie("refreshToken", rtk);
     }

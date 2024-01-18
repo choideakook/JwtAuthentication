@@ -2,35 +2,35 @@
   "groups": [
     {
       "name": "kakao.req",
-      "type": "com.atowz.auth.application.dto.KakaoTokenReqDto",
-      "sourceType": "com.atowz.auth.application.dto.KakaoTokenReqDto"
+      "type": "com.atowz.auth.domain.dto.KakaoTokenReqDto",
+      "sourceType": "com.atowz.auth.domain.dto.KakaoTokenReqDto"
     }
   ],
   "properties": [
     {
       "name": "kakao.req.client-id",
       "type": "java.lang.String",
-      "sourceType": "com.atowz.auth.application.dto.KakaoTokenReqDto"
+      "sourceType": "com.atowz.auth.domain.dto.KakaoTokenReqDto"
     },
     {
       "name": "kakao.req.client-secret",
       "type": "java.lang.String",
-      "sourceType": "com.atowz.auth.application.dto.KakaoTokenReqDto"
+      "sourceType": "com.atowz.auth.domain.dto.KakaoTokenReqDto"
     },
     {
       "name": "kakao.req.code",
       "type": "java.lang.String",
-      "sourceType": "com.atowz.auth.application.dto.KakaoTokenReqDto"
+      "sourceType": "com.atowz.auth.domain.dto.KakaoTokenReqDto"
     },
     {
       "name": "kakao.req.grant-type",
       "type": "java.lang.String",
-      "sourceType": "com.atowz.auth.application.dto.KakaoTokenReqDto"
+      "sourceType": "com.atowz.auth.domain.dto.KakaoTokenReqDto"
     },
     {
       "name": "kakao.req.redirect-uri",
       "type": "java.lang.String",
-      "sourceType": "com.atowz.auth.application.dto.KakaoTokenReqDto"
+      "sourceType": "com.atowz.auth.domain.dto.KakaoTokenReqDto"
     }
   ],
   "hints": []

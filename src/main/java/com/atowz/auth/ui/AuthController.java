@@ -32,14 +32,16 @@ public class AuthController {
         log.info("login 요청 확인 / 인가 code = {}", code);
 
         String accessToken = authService.getToken(code);
-        log.info("kakao ATK 조회 성공 : {}", accessToken);
+        log.info("kakao accessToken 조회 성공 : {}", accessToken);
 
         UserResDto user = authService.getUser(accessToken);
         Member member = getMember(user);
         HttpHeaders headers = getHeaders(member);
 
         log.info("login 성공 / member id = {}", member.getId());
-        return ResponseEntity.noContent().headers(headers).build();
+        return ResponseEntity.noContent()
+                .headers(headers)
+                .build();
     }
 
 
@@ -47,37 +49,40 @@ public class AuthController {
     public ResponseEntity reissueToken(HttpServletRequest request) {
         log.info("token 재발급 요청 확인");
 
-        String rtk = jwtService.getRefreshToken(request.getCookies());
-        Member member = jwtService.getMemberByRtk(rtk);
+        String refreshToken = jwtService.getRefreshToken(request.getCookies());
+        Member member = jwtService.getMemberByRefreshToken(refreshToken);
         HttpHeaders headers = getHeaders(member);
 
         log.info("token 재발급 성공 / member id = {}", member.getId());
-        return ResponseEntity.noContent().headers(headers).build();
+        return ResponseEntity.noContent()
+                .headers(headers)
+                .build();
     }
 
     @GetMapping("/logout")
     public ResponseEntity logout(
-            @RequestHeader("Authorization") String atk,
+            @RequestHeader("Authorization") String accessToken,
             HttpServletRequest request
     ) {
         log.info("logout 요청 확인");
 
-        String rtk = jwtService.getRefreshToken(request.getCookies());
-        Member member = jwtService.getMember(atk);
-        jwtService.expireToken(atk, rtk);
+        String refreshToken = jwtService.getRefreshToken(request.getCookies());
+        Member member = jwtService.getMember(accessToken);
+        jwtService.expireToken(accessToken, refreshToken);
 
         log.info("logout 완료 / member id = {}", member.getId());
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent()
+                .build();
     }
 
 
 
     private HttpHeaders getHeaders(Member member) {
-        HttpHeaders headers = jwtService.createAtkInHeader(member.getId());
-        String rtk = jwtService.createRtk(member.getUsername());
+        HttpHeaders headers = jwtService.createAccessTokenInHeader(member.getId());
+        String refreshToken = jwtService.createRefreshToken(member.getUsername());
         headers.add(
                 HttpHeaders.SET_COOKIE,
-                "refreshToken=" + rtk +
+                "refreshToken=" + refreshToken +
                         "; Path=/; Max-Age=" + (24 * 60 * 60 * 7));
         return headers;
     }

@@ -22,28 +22,28 @@ public class JwtService {
     private final RedisUtil redisUtil;
     private final MemberQueryService memberQueryService;
 
-    private final long ATK_EXPIRED_IN = (1000L * 60) * 10; // 10 분
-    private final long RTK_EXPIRED_IN = (1000L * 60 * 60 * 24) * 7; // 7 일
+    private final long ACCESS_TOKEN_EXPIRED_IN = (1000L * 60) * 10; // 10 분
+    private final long REFRESH_TOKEN_EXPIRED_IN = (1000L * 60 * 60 * 24) * 7; // 7 일
 
 
-    public HttpHeaders createAtkInHeader(Long memberId) {
+    public HttpHeaders createAccessTokenInHeader(Long memberId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("memberId", memberId);
 
-        String atk = jwtProvider.getToken(claims, ATK_EXPIRED_IN);
+        String accessToken = jwtProvider.getToken(claims, ACCESS_TOKEN_EXPIRED_IN);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("accessToken", atk);
+        headers.add("accessToken", accessToken);
         return headers;
     }
 
-    public String createRtk(String username) {
+    public String createRefreshToken(String username) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", username);
 
-        String rtk = jwtProvider.getToken(claims, RTK_EXPIRED_IN);
-        redisUtil.setData(username, rtk, RTK_EXPIRED_IN);
-        return rtk;
+        String refreshToken = jwtProvider.getToken(claims, REFRESH_TOKEN_EXPIRED_IN);
+        redisUtil.setData(username, refreshToken, REFRESH_TOKEN_EXPIRED_IN);
+        return refreshToken;
     }
 
     public Member getMember(String accessToken) {
@@ -65,7 +65,7 @@ public class JwtService {
         throw new IllegalArgumentException("refresh token 이 없음.");
     }
 
-    public Member getMemberByRtk(String refreshToken) {
+    public Member getMemberByRefreshToken(String refreshToken) {
         String username = (String) jwtProvider.getClaims(refreshToken).get("username");
         String value = redisUtil.getValue(username);
 
@@ -81,7 +81,7 @@ public class JwtService {
     }
 
     public void expireToken(String accessToken, String refreshToken) {
-        redisUtil.setData(accessToken, "is expired", ATK_EXPIRED_IN);
+        redisUtil.setData(accessToken, "is expired", ACCESS_TOKEN_EXPIRED_IN);
         redisUtil.deleteData((String) jwtProvider.getClaims(refreshToken).get("username"));
     }
 }
