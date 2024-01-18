@@ -97,7 +97,7 @@
       <recent name="com.atowz.global.feign.client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in atowz.test (1)">
+  <component name="RunManager" selected="JUnit.All in atowz.test (2)">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="atowz" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,7 +129,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in atowz.test (5)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in atowz.test (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="atowz.test" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="" />
@@ -284,7 +284,7 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.All in atowz.test (1)" />
-      <item itemvalue="JUnit.All in atowz.test (5)" />
+      <item itemvalue="JUnit.All in atowz.test (2)" />
       <item itemvalue="JUnit.AtowzApplicationTests" />
       <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
       <item itemvalue="JUnit.All in atowz.test" />
@@ -292,11 +292,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in atowz.test (2)" />
         <item itemvalue="JUnit.All in atowz.test (1)" />
         <item itemvalue="JUnit.AtowzApplicationTests" />
         <item itemvalue="JUnit.All in atowz.test" />
         <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
-        <item itemvalue="JUnit.All in atowz.test (5)" />
       </list>
     </recent_temporary>
   </component>
