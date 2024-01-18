@@ -1,7 +1,6 @@
 package com.atowz.auth.ui;
 
 import com.atowz.auth.domain.AuthService;
-import com.atowz.global.feign.argumentResolver.JwtAuthorization;
 import com.atowz.global.feign.dto.UserResDto;
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.member.application.MemberQueryService;
@@ -13,8 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -47,11 +44,9 @@ public class AuthController {
 
 
     @GetMapping("/reissue-token")
-    public ResponseEntity reissueToken(HttpServletRequest request) {
+    public ResponseEntity reissueToken(Member member) {
         log.info("token 재발급 요청 확인");
 
-        String refreshToken = jwtService.getRefreshToken(request.getCookies());
-        Member member = jwtService.getMemberByRefreshToken(refreshToken);
         HttpHeaders headers = jwtService.createTokenInHeader(member);
 
         log.info("token 재발급 성공 / member id = {}", member.getId());

@@ -66,7 +66,7 @@ public class JwtService {
         throw new IllegalArgumentException("만료된 access token.");
     }
 
-    public void isValid(String accessToken) {
+    public void isAccessTokenValid(String accessToken) {
         String value = redisUtil.getValue(accessToken);
 
         if (value != null) {
@@ -82,19 +82,15 @@ public class JwtService {
         throw new IllegalArgumentException("refresh token 이 없음.");
     }
 
-    public Member getMemberByRefreshToken(String refreshToken) {
+    public void isRefreshTokenValid(String refreshToken) {
         String username = (String) jwtProvider.getClaims(refreshToken).get("username");
         String value = redisUtil.getValue(username);
 
         if (!refreshToken.equals(value))
             throw new IllegalArgumentException("유효하지 않는 refresh token.");
 
-        Optional<Member> byUsername = memberQueryService.byUsername(username);
-
-        if (byUsername.isPresent())
-            return byUsername.get();
-
-        throw new IllegalStateException("존재하지 않는 username.");
+        memberQueryService.byUsername(username)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 username."));
     }
 
     public void expireToken(String accessToken, String refreshToken) {
