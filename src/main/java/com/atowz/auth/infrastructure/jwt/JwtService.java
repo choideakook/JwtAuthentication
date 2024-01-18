@@ -58,9 +58,6 @@ public class JwtService {
     }
 
     public void isValid(String accessToken) {
-        if (accessToken == null)
-            throw new IllegalArgumentException("Authorization 이 없음");
-
         String value = redisUtil.getValue(accessToken);
 
         if (value != null) {

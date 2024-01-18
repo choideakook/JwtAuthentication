@@ -1,7 +1,6 @@
 package com.atowz.global.feign.argumentResolver;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
-import com.atowz.member.doamin.entity.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;

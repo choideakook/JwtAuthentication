@@ -32,6 +32,7 @@
       <list>
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
+        <option value="AnnotationType" />
         <option value="Class" />
       </list>
     </option>
@@ -97,7 +98,7 @@
       <recent name="com.atowz.global.feign.client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in atowz.test (1)">
+  <component name="RunManager" selected="Spring Boot.AtowzApplication">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="atowz" />
       <option name="INTERPRETER_OPTIONS" value="" />

@@ -1,6 +1,7 @@
 package com.atowz.auth.ui;
 
 import com.atowz.auth.domain.AuthService;
+import com.atowz.global.feign.argumentResolver.JwtAuthorization;
 import com.atowz.global.feign.dto.UserResDto;
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.member.application.MemberQueryService;
@@ -75,6 +76,12 @@ public class AuthController {
                 .build();
     }
 
+    @GetMapping("/test")
+    public ResponseEntity interceptorTest(@JwtAuthorization String success) {
+        log.info("요청 확인 member id = {}", success);
+        return ResponseEntity.noContent()
+                .build();
+    }
 
 
     private HttpHeaders getHeaders(Member member) {
