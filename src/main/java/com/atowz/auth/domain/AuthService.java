@@ -19,13 +19,11 @@ public class AuthService {
     private final KakaoTokenClient tokenClient;
     private final KakaoUserClient userClient;
 
-    @Autowired
-    private KakaoTokenReqDto reqDto;
-
-    private final String KAKAO_TOKEN_TYPE = "Bearer";
+    private final String KAKAO_TOKEN_TYPE = "Bearer ";
 
     public String getToken(String code) {
-        reqDto.setCode(code);
+        KakaoTokenReqDto reqDto = new KakaoTokenReqDto();
+        reqDto.addCode(code);
 
         KakaoTokenResDto resDto = tokenClient.getToken(reqDto);
         return resDto.getAccess_token();
@@ -34,7 +32,7 @@ public class AuthService {
     public UserResDto getUser(String accessToken) {
         KakaoUserResDto resDto = userClient.getUser(KAKAO_TOKEN_TYPE + accessToken);
         UserResDto userDto = resDto.getProperties();
-        userDto.setId(String.valueOf(resDto.getId()));
+        userDto.addUsername(resDto.getId());
         return userDto;
     }
 }

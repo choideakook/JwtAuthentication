@@ -5,13 +5,11 @@ kakao:
     req_token: /oauth/token
     req_user: /v2/user/me
 
-  req:
+  request:
     grant_type: authorization_code
     client_id: ENC(nSHuT06UivSKWOPYZHFZJX3XqZb4PXGR49w0DlLeb8uWlUbSRP240bslBfat/T2G)
     redirect_uri: http://localhost:8080/api/auth/kakao
     client_secret: ENC(FtBWbVxrBZx+uPJNtplfoOfH8qVeOaP8fnqn478fV6EoT4+AMihBMdr77bznFQ+2)
-    code:
-
 
 
 spring:

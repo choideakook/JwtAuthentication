@@ -88,7 +88,7 @@ public class AuthController {
     }
 
     private Member getMember(UserResDto user) {
-        Optional<Member> byUsername = memberQueryService.byUsername(user.getId());
+        Optional<Member> byUsername = memberQueryService.byUsername(user.getUsername());
 
         if (byUsername.isPresent())
             return byUsername.get();

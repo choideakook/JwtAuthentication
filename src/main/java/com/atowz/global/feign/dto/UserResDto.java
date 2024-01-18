@@ -1,15 +1,17 @@
 package com.atowz.global.feign.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class UserResDto {
 
-    private String id;
+    private String username;
     private String nickname;
     private String profile_image;
+
+    public void addUsername(Long userId) {
+        this.username = String.valueOf(userId);
+    }
 }

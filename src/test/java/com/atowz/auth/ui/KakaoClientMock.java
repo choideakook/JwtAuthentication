@@ -21,19 +21,15 @@ public class KakaoClientMock {
 
     public void requestTokenMocking() {
         KakaoTokenResDto resDto = new KakaoTokenResDto();
-        resDto.setAccess_token("kakao access token");
+        resDto.addKakaoAccessToken("kakao access token");
 
         when(kakaoTokenClient.getToken(any()))
                 .thenReturn(resDto);
     }
 
     public void requestUserMocking() {
-        KakaoUserResDto resDto = new KakaoUserResDto();
-        UserResDto user = new UserResDto();
-        user.setNickname("user1");
-        user.setProfile_image("img");
-        resDto.setId(1234L);
-        resDto.setProperties(user);
+        UserResDto user = new UserResDto(null, "user1", "img");
+        KakaoUserResDto resDto = new KakaoUserResDto(1234L, user);
 
         when(kakaoUserClient.getUser(eq("Bearer kakao access token")))
                 .thenReturn(resDto);

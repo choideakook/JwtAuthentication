@@ -54,7 +54,7 @@ public class Member {
 
     public static Member createMember(UserResDto dto, String recommendCode) {
         Member member = builder()
-                .username(dto.getId())
+                .username(dto.getUsername())
                 .nickname(dto.getNickname())
                 .recommendCode(recommendCode)
                 .status(MEMBER)

@@ -1,8 +1,8 @@
 package com.atowz.global.feign.dto;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class KakaoTokenResDto {
 
     private String token_type;
@@ -10,4 +10,8 @@ public class KakaoTokenResDto {
     private String expires_in;
     private String refresh_token;
     private String refresh_token_expires_in;
+
+    public void addKakaoAccessToken(String kakaoAccessToken) {
+        this.access_token = kakaoAccessToken;
+    }
 }
