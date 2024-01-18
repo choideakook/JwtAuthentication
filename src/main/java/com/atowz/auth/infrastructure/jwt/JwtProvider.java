@@ -35,7 +35,7 @@ public class JwtProvider {
 
     public String getToken(Map<String, Object> claims, long seconds) {
         long now = new Date().getTime();
-        Date tokenExpireIn = new Date(now + 1000L + seconds);
+        Date tokenExpireIn = new Date(now + seconds);
 
         return Jwts.builder()
                 .claim("body", jsonToStr(claims))
@@ -64,11 +64,11 @@ public class JwtProvider {
         try {
             return new ObjectMapper().writeValueAsString(claims);
         } catch (JsonProcessingException e) {
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
-    private Map<String, Object> strToMap(String jsonStr) {
+        private Map<String, Object> strToMap(String jsonStr) {
         try {
             return new ObjectMapper().readValue(jsonStr, LinkedHashMap.class);
         } catch (JsonProcessingException e) {
