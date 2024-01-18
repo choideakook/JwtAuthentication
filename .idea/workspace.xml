@@ -40,6 +40,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -94,13 +99,14 @@
       <recent name="com.atowz.global.jwt" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.atowz.global.argumentResolver.getToken" />
       <recent name="com.atowz.global.feign.argumentResolver.refreshToken" />
       <recent name="com.atowz.global.feign.interceptor" />
       <recent name="com.atowz.member.application" />
       <recent name="com.atowz.global.feign.client" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AtowzApplication">
+  <component name="RunManager" selected="JUnit.All in atowz.test (1)">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="atowz" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -143,7 +149,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in atowz.test (5)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in atowz.test (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="atowz.test" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="" />
@@ -280,7 +286,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.All in atowz.test (5)" />
+      <item itemvalue="JUnit.All in atowz.test (3)" />
       <item itemvalue="JUnit.All in atowz.test (1)" />
       <item itemvalue="JUnit.All in atowz.test (2)" />
       <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
@@ -289,11 +295,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in atowz.test" />
-        <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
-        <item itemvalue="JUnit.All in atowz.test (2)" />
-        <item itemvalue="JUnit.All in atowz.test (5)" />
         <item itemvalue="JUnit.All in atowz.test (1)" />
+        <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
+        <item itemvalue="JUnit.All in atowz.test (3)" />
+        <item itemvalue="JUnit.All in atowz.test" />
+        <item itemvalue="JUnit.All in atowz.test (2)" />
       </list>
     </recent_temporary>
   </component>

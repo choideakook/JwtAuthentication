@@ -19,6 +19,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new AccessTokenInterceptor(jwtService))
                 .addPathPatterns("/**");
         registry.addInterceptor(new RefreshTokenInterceptor(jwtService))
-                .addPathPatterns("/api/auth/reissue-token");
+                .addPathPatterns("/api/auth/reissue-token", "/api/auth/logout");
     }
 }
