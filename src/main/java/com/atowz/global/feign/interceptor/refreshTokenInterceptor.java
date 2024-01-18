@@ -1,6 +1,7 @@
 package com.atowz.global.feign.interceptor;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
+import com.atowz.member.doamin.entity.Member;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,8 +22,9 @@ public class RefreshTokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
         String refreshToken = getRefreshToken(cookies);
-        jwtService.isRefreshTokenValid(refreshToken);
+        Member member = jwtService.getMemberAndValidationCheck(refreshToken);
 
+        request.setAttribute("member", member);
         log.info("refresh token 유효성 검사 완료");
         return true;
     }

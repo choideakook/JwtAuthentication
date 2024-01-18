@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -82,14 +81,14 @@ public class JwtService {
         throw new IllegalArgumentException("refresh token 이 없음.");
     }
 
-    public void isRefreshTokenValid(String refreshToken) {
+    public Member getMemberAndValidationCheck(String refreshToken) {
         String username = (String) jwtProvider.getClaims(refreshToken).get("username");
         String value = redisUtil.getValue(username);
 
         if (!refreshToken.equals(value))
             throw new IllegalArgumentException("유효하지 않는 refresh token.");
 
-        memberQueryService.byUsername(username)
+        return memberQueryService.byUsername(username)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 username."));
     }
 

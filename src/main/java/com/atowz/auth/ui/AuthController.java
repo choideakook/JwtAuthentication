@@ -1,6 +1,7 @@
 package com.atowz.auth.ui;
 
 import com.atowz.auth.domain.AuthService;
+import com.atowz.global.feign.argumentResolver.refreshToken.RefreshTokenAuthorization;
 import com.atowz.global.feign.dto.UserResDto;
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.member.application.MemberQueryService;
@@ -44,7 +45,7 @@ public class AuthController {
 
 
     @GetMapping("/reissue-token")
-    public ResponseEntity reissueToken(Member member) {
+    public ResponseEntity reissueToken(@RefreshTokenAuthorization Member member) {
         log.info("token 재발급 요청 확인");
 
         HttpHeaders headers = jwtService.createTokenInHeader(member);

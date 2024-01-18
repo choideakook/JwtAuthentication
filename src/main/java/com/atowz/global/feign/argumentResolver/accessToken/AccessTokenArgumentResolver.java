@@ -1,4 +1,4 @@
-package com.atowz.global.feign.argumentResolver;
+package com.atowz.global.feign.argumentResolver.accessToken;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,13 +12,13 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
 @RequiredArgsConstructor
-public class JwtArgumentResolver implements HandlerMethodArgumentResolver {
+public class AccessTokenArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final JwtService jwtService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(JwtAuthorization.class);
+        return parameter.hasParameterAnnotation(AccessTokenAuthorization.class);
     }
 
     @Override
