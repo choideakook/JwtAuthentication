@@ -28,14 +28,15 @@ public class JwtProvider {
     }
 
     public SecretKey getSecretKey() {
-        if (cachedSecretKey == null)
+        if (cachedSecretKey == null) {
             cachedSecretKey = _getSecretKey();
+        }
         return cachedSecretKey;
     }
 
     public String getToken(Map<String, Object> claims, long seconds) {
         long now = new Date().getTime();
-        Date tokenExpireIn = new Date(now + seconds);
+        Date tokenExpireIn = new Date(now + 1000L + seconds);
 
         return Jwts.builder()
                 .claim("body", jsonToStr(claims))

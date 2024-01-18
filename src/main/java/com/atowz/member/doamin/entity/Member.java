@@ -51,7 +51,7 @@ public class Member {
     private Exam exam;
 
 
-    public static Member createMember(String username, String nickname, String profileImg, String recommendCode) {
+    public static Member createKakaoMember(String username, String nickname, String profileImg, String recommendCode) {
         Member member = builder()
                 .username(username)
                 .nickname(nickname)

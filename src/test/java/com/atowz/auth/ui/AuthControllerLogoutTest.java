@@ -41,9 +41,9 @@ class AuthControllerLogoutTest {
     @Test
     @DisplayName("logout 성공")
     void no1() throws Exception {
-        Member member = createMember();
-        HttpHeaders headers = getHeader(member);
-        Cookie cookie = getCookie(member.getUsername());
+        Member member = createMemberForLogout();
+        HttpHeaders headers = getHeaderInAccessToken(member);
+        Cookie cookie = getCookieByUsername(member.getUsername());
 
         ResultActions result = mvc.perform(MockMvcRequestBuilders
                 .get("/api/auth/logout")
@@ -55,7 +55,7 @@ class AuthControllerLogoutTest {
         result.andExpect(status().is2xxSuccessful());
     }
 
-    private Member createMember() {
+    private Member createMemberForLogout() {
         return memberService.createMember(
                 new UserResDto(
                         "1234",
@@ -63,13 +63,13 @@ class AuthControllerLogoutTest {
                         "img"));
     }
 
-    private HttpHeaders getHeader(Member member) {
+    private HttpHeaders getHeaderInAccessToken(Member member) {
         HttpHeaders headers = jwtService.createTokenInHeader(member);
         headers.add("Authorization", headers.getFirst("accessToken"));
         return headers;
     }
 
-    private Cookie getCookie(String username) {
+    private Cookie getCookieByUsername(String username) {
         String rtk = jwtService.createRefreshToken(username);
         redisUtil.setData(username, rtk, (1000L * 60 * 60 * 24) * 7);
         return new Cookie("refreshToken", rtk);

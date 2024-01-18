@@ -18,7 +18,7 @@ public class MemberServiceImp implements MemberService {
 
     @Override
     public Member createMember(UserResDto dto) {
-        Member member = Member.createMember(
+        Member member = Member.createKakaoMember(
                 dto.getUsername(),
                 dto.getNickname(),
                 dto.getProfile_image(),

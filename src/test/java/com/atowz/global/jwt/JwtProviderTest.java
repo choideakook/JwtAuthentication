@@ -1,8 +1,6 @@
 package com.atowz.global.jwt;
 
 import com.atowz.auth.infrastructure.jwt.JwtProvider;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,7 @@ class JwtProviderTest {
     @Test
     @DisplayName("JWT 생성")
     void no1() {
-        Map<String, Object> claims = createClaims();
-
-        String jwt = jwtProvider.getToken(claims, 60 * 10);
+        String jwt = createJwt();
 
         assertThat(jwt).isNotEmpty();
     }
@@ -34,9 +30,7 @@ class JwtProviderTest {
     @Test
     @DisplayName("JWT 복호화")
     void no2() {
-        Map<String, Object> claims = createClaims();
-        String jwt = jwtProvider.getToken(claims, 60 * 10);
-
+        String jwt = createJwt();
         Map<String, Object> result = jwtProvider.getClaims(jwt);
 
         assertSoftly(softly -> {
@@ -45,11 +39,11 @@ class JwtProviderTest {
         });
     }
 
-
-    private static Map<String, Object> createClaims() {
+    private String createJwt() {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", 1);
         claims.put("username", "user");
-        return claims;
+
+        return jwtProvider.getToken(claims, 60 * 10);
     }
 }

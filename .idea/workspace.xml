@@ -106,7 +106,7 @@
       <recent name="com.atowz.global.feign.client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in atowz.test (4)">
+  <component name="RunManager" selected="JUnit.JwtProviderTest">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="atowz" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -138,7 +138,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in atowz.test (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in atowz.test (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="atowz.test" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="" />
@@ -171,18 +171,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthControllerLogoutTest.no1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JwtProviderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="atowz.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.atowz.auth.ui.*" />
+          <option name="PATTERN" value="com.atowz.global.jwt.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.atowz.auth.ui" />
-      <option name="MAIN_CLASS_NAME" value="com.atowz.auth.ui.AuthControllerLogoutTest" />
-      <option name="METHOD_NAME" value="no1" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="com.atowz.global.jwt" />
+      <option name="MAIN_CLASS_NAME" value="com.atowz.global.jwt.JwtProviderTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=atwoz" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -286,20 +286,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.All in atowz.test (3)" />
       <item itemvalue="JUnit.All in atowz.test (4)" />
+      <item itemvalue="JUnit.JwtProviderTest" />
       <item itemvalue="JUnit.All in atowz.test (1)" />
-      <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
+      <item itemvalue="JUnit.All in atowz.test (2)" />
       <item itemvalue="JUnit.All in atowz.test" />
       <item itemvalue="Spring Boot.AtowzApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.JwtProviderTest" />
+        <item itemvalue="JUnit.All in atowz.test" />
+        <item itemvalue="JUnit.All in atowz.test (2)" />
         <item itemvalue="JUnit.All in atowz.test (4)" />
         <item itemvalue="JUnit.All in atowz.test (1)" />
-        <item itemvalue="JUnit.AuthControllerLogoutTest.no1" />
-        <item itemvalue="JUnit.All in atowz.test (3)" />
-        <item itemvalue="JUnit.All in atowz.test" />
       </list>
     </recent_temporary>
   </component>
