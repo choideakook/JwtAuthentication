@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface MemberQueryService {
 
-    Optional<Member> byUsername(String username);
+    Optional<Member> findByUsername(String username);
 
-    Member byId(Long memberId);
+    Member findById(Long memberId);
 }

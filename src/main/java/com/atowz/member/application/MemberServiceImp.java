@@ -7,13 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@Transactional
+import java.util.UUID;
+
 @RequiredArgsConstructor
+@Transactional
+@Service
 public class MemberServiceImp implements MemberService {
 
     private final MemberJpaRepository memberJpaRepository;
-
 
     @Override
     public Member createMember(UserResDto dto) {
@@ -23,13 +24,15 @@ public class MemberServiceImp implements MemberService {
 
 
     private String getRecommendCode() {
-        while (true) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < 7; i++)
-                sb.append((int) (Math.random() * 10));
+        int recommendCodeLength = 8;
 
-            if (!memberJpaRepository.existsByRecommendCode(sb.toString()))
-                return sb.toString();
+        while (true) {
+            String recommendCode = UUID.randomUUID()
+                    .toString()
+                    .substring(0, recommendCodeLength);
+
+            if (!memberJpaRepository.existsByRecommendCode(recommendCode))
+                return recommendCode;
         }
     }
 }

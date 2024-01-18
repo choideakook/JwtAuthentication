@@ -10,7 +10,6 @@ import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -71,7 +70,7 @@ public class AuthController {
     }
 
     private Member getMember(UserResDto user) {
-        return memberQueryService.byUsername(user.getUsername())
+        return memberQueryService.findByUsername(user.getUsername())
                 .orElse(memberService.createMember(user));
     }
 }

@@ -4,7 +4,6 @@ import com.atowz.auth.domain.dto.TokenReqDto;
 import com.atowz.auth.infrastructure.redis.RedisUtil;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.doamin.entity.Member;
-import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -60,7 +59,7 @@ public class JwtService {
 
         if (value == null) {
             Long memberId = (long) (Integer) jwtProvider.getClaims(accessToken).get("memberId");
-            return memberQueryService.byId(memberId);
+            return memberQueryService.findById(memberId);
         }
 
         throw new IllegalArgumentException("만료된 access token.");
@@ -81,7 +80,7 @@ public class JwtService {
         if (!refreshToken.equals(value))
             throw new IllegalArgumentException("유효하지 않는 refresh token.");
 
-        return memberQueryService.byUsername(username)
+        return memberQueryService.findByUsername(username)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 username."));
     }
 
