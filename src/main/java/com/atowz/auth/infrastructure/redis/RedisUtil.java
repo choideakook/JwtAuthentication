@@ -1,4 +1,4 @@
-package com.atowz.global.redis;
+package com.atowz.auth.infrastructure.redis;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;

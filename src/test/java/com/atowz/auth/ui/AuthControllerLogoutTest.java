@@ -1,8 +1,8 @@
 package com.atowz.auth.ui;
 
 import com.atowz.global.feign.dto.UserResDto;
-import com.atowz.global.jwt.JwtService;
-import com.atowz.global.redis.RedisUtil;
+import com.atowz.auth.infrastructure.jwt.JwtService;
+import com.atowz.auth.infrastructure.redis.RedisUtil;
 import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
 import jakarta.servlet.http.Cookie;

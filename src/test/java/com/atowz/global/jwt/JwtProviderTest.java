@@ -1,5 +1,6 @@
 package com.atowz.global.jwt;
 
+import com.atowz.auth.infrastructure.jwt.JwtProvider;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

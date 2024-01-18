@@ -1,6 +1,6 @@
-package com.atowz.global.jwt;
+package com.atowz.auth.infrastructure.jwt;
 
-import com.atowz.global.redis.RedisUtil;
+import com.atowz.auth.infrastructure.redis.RedisUtil;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.doamin.entity.Member;
 import jakarta.servlet.http.Cookie;

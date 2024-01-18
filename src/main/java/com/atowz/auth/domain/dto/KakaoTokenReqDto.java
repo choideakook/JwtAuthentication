@@ -1,4 +1,4 @@
-package com.atowz.auth.application.dto;
+package com.atowz.auth.domain.dto;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-package com.atowz.global.jwt;
+package com.atowz.auth.infrastructure.jwt;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

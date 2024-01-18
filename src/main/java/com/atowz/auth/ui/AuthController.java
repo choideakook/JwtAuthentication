@@ -1,8 +1,8 @@
 package com.atowz.auth.ui;
 
-import com.atowz.auth.application.AuthService;
+import com.atowz.auth.domain.AuthService;
 import com.atowz.global.feign.dto.UserResDto;
-import com.atowz.global.jwt.JwtService;
+import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;

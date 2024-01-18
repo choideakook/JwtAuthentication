@@ -1,6 +1,6 @@
 package com.atowz.global.feign.client;
 
-import com.atowz.auth.application.dto.KakaoTokenReqDto;
+import com.atowz.auth.domain.dto.KakaoTokenReqDto;
 import com.atowz.global.feign.dto.KakaoTokenResDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
