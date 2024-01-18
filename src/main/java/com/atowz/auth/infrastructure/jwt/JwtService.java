@@ -74,14 +74,6 @@ public class JwtService {
         }
     }
 
-    public String getRefreshToken(Cookie[] cookies) {
-        for (Cookie cookie : cookies)
-            if ("refreshToken".equals(cookie.getName()))
-                return cookie.getValue();
-
-        throw new IllegalArgumentException("refresh token 이 없음.");
-    }
-
     public Member getMemberAndValidationCheck(String refreshToken) {
         String username = (String) jwtProvider.getClaims(refreshToken).get("username");
         String value = redisUtil.getValue(username);
