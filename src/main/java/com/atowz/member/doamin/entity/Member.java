@@ -1,6 +1,5 @@
 package com.atowz.member.doamin.entity;
 
-import com.atowz.global.feign.dto.UserResDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,11 +15,11 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
-@Entity
 @Getter
 @Builder(toBuilder = true)
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor(access = PRIVATE)
+@Entity
 public class Member {
 
     @Id
@@ -31,6 +30,8 @@ public class Member {
     private String nickname;
     private String recommendCode;
     private int recommendCount;
+    private Boolean useAgreement;
+    private Boolean personalInformation;
 
     @Builder.Default
     @ElementCollection
@@ -49,20 +50,17 @@ public class Member {
     @Embedded
     private Exam exam;
 
-    private Boolean useAgreement;
-    private Boolean personalInformation;
 
-
-    public static Member createMember(UserResDto dto, String recommendCode) {
+    public static Member createMember(String username, String nickname, String profileImg, String recommendCode) {
         Member member = builder()
-                .username(dto.getUsername())
-                .nickname(dto.getNickname())
+                .username(username)
+                .nickname(nickname)
                 .recommendCode(recommendCode)
                 .status(MEMBER)
                 .build();
 
         List<String> profileImgList = member.getProfileImg();
-        profileImgList.add(dto.getProfile_image());
+        profileImgList.add(profileImg);
         return member;
     }
 }

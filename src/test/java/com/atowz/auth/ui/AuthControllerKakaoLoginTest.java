@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
-class AuthControllerKakaoLoginTest extends KakaoClientMock{
+class AuthControllerKakaoLoginTest extends KakaoClientMock {
 
     @Autowired MockMvc mvc;
     @Autowired RedisUtil redisUtil;

@@ -18,7 +18,12 @@ public class MemberServiceImp implements MemberService {
 
     @Override
     public Member createMember(UserResDto dto) {
-        Member member = Member.createMember(dto, getRecommendCode());
+        Member member = Member.createMember(
+                dto.getUsername(),
+                dto.getNickname(),
+                dto.getProfile_image(),
+                getRecommendCode());
+
         return memberJpaRepository.save(member);
     }
 
