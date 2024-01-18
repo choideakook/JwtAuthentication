@@ -8,6 +8,7 @@ import com.atowz.global.feign.dto.KakaoUserResDto;
 import com.atowz.global.feign.dto.UserResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +20,19 @@ public class AuthService {
     private final KakaoTokenClient tokenClient;
     private final KakaoUserClient userClient;
 
+    @Value("${kakao.request.grant_type}")
+    private String grantType;
+    @Value("${kakao.request.client_id}")
+    private String clientId;
+    @Value("${kakao.request.redirect_uri}")
+    private String redirectUri;
+    @Value("${kakao.request.client_secret}")
+    private String clientSecret;
+
     private final String KAKAO_TOKEN_TYPE = "Bearer ";
 
     public String getToken(String code) {
-        KakaoTokenReqDto reqDto = new KakaoTokenReqDto();
-        reqDto.addCode(code);
+        KakaoTokenReqDto reqDto = new KakaoTokenReqDto(grantType, clientId, redirectUri, clientSecret, code);
 
         KakaoTokenResDto resDto = tokenClient.getToken(reqDto);
         return resDto.getAccess_token();
