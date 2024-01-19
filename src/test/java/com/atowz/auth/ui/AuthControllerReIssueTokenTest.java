@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,12 +18,17 @@ import org.springframework.transaction.annotation.Transactional;
 import static com.atowz.global.exception.ui.ErrorStatus.JWT_INVALID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.restdocs.cookies.CookieDocumentation.cookieWithName;
+import static org.springframework.restdocs.cookies.CookieDocumentation.requestCookies;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("통합 : 토큰 재발급")
 @SpringBootTest
 @Transactional
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs
 class AuthControllerReIssueTokenTest extends KakaoClientMock {
 
     @Autowired
@@ -54,7 +60,14 @@ class AuthControllerReIssueTokenTest extends KakaoClientMock {
                 )
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(cookie().exists("refreshToken"))
-                .andExpect(header().exists("accessToken"));
+                .andExpect(header().exists("accessToken"))
+                .andDo(document("reissue_token",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestCookies(
+                                cookieWithName("refreshToken").description("set refresh token")
+                        )
+                ));
 
         String newRefreshToken = redisUtil.getValue("1234");
         assertThat(newRefreshToken).isNotEqualTo(oldRefreshToken);
