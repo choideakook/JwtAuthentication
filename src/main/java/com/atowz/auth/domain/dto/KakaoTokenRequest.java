@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class KakaoTokenReqDto {
+public class KakaoTokenRequest {
 
     private String grant_type;
     private String client_id;

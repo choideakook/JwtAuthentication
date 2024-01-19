@@ -1,7 +1,6 @@
 package com.atowz.global.argumentResolver.getToken;
 
-import com.atowz.auth.domain.dto.TokenReqDto;
-import com.atowz.global.argumentResolver.refreshTokenToMember.RefreshTokenToMember;
+import com.atowz.auth.domain.dto.TokenRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -24,6 +23,6 @@ public class TokenArgumentResolver implements HandlerMethodArgumentResolver {
         String accessToken = request.getHeader("Authorization");
         String refreshToken = (String) request.getAttribute("refreshToken");
 
-        return new TokenReqDto(accessToken, refreshToken);
+        return new TokenRequest(accessToken, refreshToken);
     }
 }

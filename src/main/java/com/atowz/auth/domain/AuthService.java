@@ -1,13 +1,12 @@
 package com.atowz.auth.domain;
 
-import com.atowz.auth.domain.dto.KakaoTokenReqDto;
+import com.atowz.auth.domain.dto.KakaoTokenRequest;
 import com.atowz.global.feign.client.KakaoTokenClient;
 import com.atowz.global.feign.client.KakaoUserClient;
-import com.atowz.global.feign.dto.KakaoTokenResDto;
-import com.atowz.global.feign.dto.KakaoUserResDto;
-import com.atowz.global.feign.dto.UserResDto;
+import com.atowz.global.feign.dto.KakaoTokenResponse;
+import com.atowz.global.feign.dto.KakaoUserResponse;
+import com.atowz.global.feign.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,15 +31,15 @@ public class AuthService {
     private final String KAKAO_TOKEN_TYPE = "Bearer ";
 
     public String getToken(String code) {
-        KakaoTokenReqDto reqDto = new KakaoTokenReqDto(grantType, clientId, redirectUri, clientSecret, code);
+        KakaoTokenRequest reqDto = new KakaoTokenRequest(grantType, clientId, redirectUri, clientSecret, code);
 
-        KakaoTokenResDto resDto = tokenClient.getToken(reqDto);
+        KakaoTokenResponse resDto = tokenClient.getToken(reqDto);
         return resDto.getAccess_token();
     }
 
-    public UserResDto getUser(String accessToken) {
-        KakaoUserResDto resDto = userClient.getUser(KAKAO_TOKEN_TYPE + accessToken);
-        UserResDto userDto = resDto.getProperties();
+    public UserResponse getUser(String accessToken) {
+        KakaoUserResponse resDto = userClient.getUser(KAKAO_TOKEN_TYPE + accessToken);
+        UserResponse userDto = resDto.getProperties();
         userDto.addUsername(resDto.getId());
         return userDto;
     }

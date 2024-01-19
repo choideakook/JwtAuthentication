@@ -3,7 +3,7 @@ package com.atowz.global.feign.dto;
 import lombok.Getter;
 
 @Getter
-public class KakaoTokenResDto {
+public class KakaoTokenResponse {
 
     private String token_type;
     private String access_token;

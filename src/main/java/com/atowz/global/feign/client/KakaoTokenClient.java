@@ -1,7 +1,7 @@
 package com.atowz.global.feign.client;
 
-import com.atowz.auth.domain.dto.KakaoTokenReqDto;
-import com.atowz.global.feign.dto.KakaoTokenResDto;
+import com.atowz.auth.domain.dto.KakaoTokenRequest;
+import com.atowz.global.feign.dto.KakaoTokenResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface KakaoTokenClient {
 
     @PostMapping(value = "${kakao.feign.req_token}", consumes = "application/x-www-form-urlencoded")
-    KakaoTokenResDto getToken(@RequestBody KakaoTokenReqDto body);
+    KakaoTokenResponse getToken(@RequestBody KakaoTokenRequest body);
 }

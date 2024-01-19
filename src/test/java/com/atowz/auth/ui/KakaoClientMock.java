@@ -2,9 +2,9 @@ package com.atowz.auth.ui;
 
 import com.atowz.global.feign.client.KakaoTokenClient;
 import com.atowz.global.feign.client.KakaoUserClient;
-import com.atowz.global.feign.dto.KakaoTokenResDto;
-import com.atowz.global.feign.dto.KakaoUserResDto;
-import com.atowz.global.feign.dto.UserResDto;
+import com.atowz.global.feign.dto.KakaoTokenResponse;
+import com.atowz.global.feign.dto.KakaoUserResponse;
+import com.atowz.global.feign.dto.UserResponse;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -20,7 +20,7 @@ public class KakaoClientMock {
     private KakaoUserClient kakaoUserClient;
 
     public void requestTokenMocking() {
-        KakaoTokenResDto resDto = new KakaoTokenResDto();
+        KakaoTokenResponse resDto = new KakaoTokenResponse();
         resDto.addKakaoAccessToken("kakao access token");
 
         when(kakaoTokenClient.getToken(any()))
@@ -28,8 +28,8 @@ public class KakaoClientMock {
     }
 
     public void requestUserMocking() {
-        UserResDto user = new UserResDto(null, "user1", "img");
-        KakaoUserResDto resDto = new KakaoUserResDto(1234L, user);
+        UserResponse user = new UserResponse(null, "user1", "img");
+        KakaoUserResponse resDto = new KakaoUserResponse(1234L, user);
 
         when(kakaoUserClient.getUser(eq("Bearer kakao access token")))
                 .thenReturn(resDto);

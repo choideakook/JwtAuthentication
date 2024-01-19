@@ -1,6 +1,6 @@
 package com.atowz.member.application;
 
-import com.atowz.global.feign.dto.UserResDto;
+import com.atowz.global.feign.dto.UserResponse;
 import com.atowz.member.doamin.entity.Member;
 import com.atowz.member.infrastructure.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class MemberServiceImp implements MemberService {
     private final MemberJpaRepository memberJpaRepository;
 
     @Override
-    public Member createMember(UserResDto dto) {
+    public Member createMember(UserResponse dto) {
         Member member = Member.createKakaoMember(
                 dto.getUsername(),
                 dto.getNickname(),

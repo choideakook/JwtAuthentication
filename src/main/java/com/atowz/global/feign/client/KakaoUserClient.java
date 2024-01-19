@@ -1,6 +1,6 @@
 package com.atowz.global.feign.client;
 
-import com.atowz.global.feign.dto.KakaoUserResDto;
+import com.atowz.global.feign.dto.KakaoUserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface KakaoUserClient {
 
     @GetMapping(value = "${kakao.feign.req_user}", consumes = "application/x-www-form-urlencoded")
-    KakaoUserResDto getUser(@RequestHeader("Authorization") String atk);
+    KakaoUserResponse getUser(@RequestHeader("Authorization") String atk);
 }

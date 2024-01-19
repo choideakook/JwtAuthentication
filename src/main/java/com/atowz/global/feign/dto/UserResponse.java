@@ -9,7 +9,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Getter
 @NoArgsConstructor(access = PRIVATE)
 @AllArgsConstructor
-public class UserResDto {
+public class UserResponse {
 
     private String username;
     private String nickname;

@@ -1,11 +1,11 @@
 package com.atowz.auth.ui;
 
 import com.atowz.auth.domain.AuthService;
-import com.atowz.auth.domain.dto.TokenReqDto;
+import com.atowz.auth.domain.dto.TokenRequest;
 import com.atowz.global.argumentResolver.accessTokenToMember.AccessTokenToMember;
 import com.atowz.global.argumentResolver.getToken.GetToken;
 import com.atowz.global.argumentResolver.refreshTokenToMember.RefreshTokenToMember;
-import com.atowz.global.feign.dto.UserResDto;
+import com.atowz.global.feign.dto.UserResponse;
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.application.MemberService;
@@ -35,7 +35,7 @@ public class AuthController {
         String accessToken = authService.getToken(code);
         log.info("kakao accessToken 조회 성공 : {}", accessToken);
 
-        UserResDto user = authService.getUser(accessToken);
+        UserResponse user = authService.getUser(accessToken);
         Member member = getMember(user);
         HttpHeaders headers = jwtService.createTokenInHeader(member);
 
@@ -59,7 +59,7 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity logout(@GetToken TokenReqDto tokenDto, @AccessTokenToMember Member member) {
+    public ResponseEntity logout(@GetToken TokenRequest tokenDto, @AccessTokenToMember Member member) {
         log.info("logout 요청 확인");
 
         jwtService.expireToken(tokenDto);
@@ -69,7 +69,7 @@ public class AuthController {
                 .build();
     }
 
-    private Member getMember(UserResDto user) {
+    private Member getMember(UserResponse user) {
         return memberQueryService.findByUsername(user.getUsername())
                 .orElse(memberService.createMember(user));
     }

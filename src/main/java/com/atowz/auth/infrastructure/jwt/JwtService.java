@@ -1,6 +1,6 @@
 package com.atowz.auth.infrastructure.jwt;
 
-import com.atowz.auth.domain.dto.TokenReqDto;
+import com.atowz.auth.domain.dto.TokenRequest;
 import com.atowz.auth.infrastructure.redis.RedisUtil;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.doamin.entity.Member;
@@ -84,7 +84,7 @@ public class JwtService {
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 username."));
     }
 
-    public void expireToken(TokenReqDto tokenDto) {
+    public void expireToken(TokenRequest tokenDto) {
         redisUtil.setData(tokenDto.getAccessToken(), "is expired", ACCESS_TOKEN_EXPIRED_IN);
         redisUtil.deleteData((String) jwtProvider
                 .getClaims(tokenDto.getRefreshToken())

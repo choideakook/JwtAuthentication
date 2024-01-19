@@ -1,6 +1,6 @@
 package com.atowz.auth.ui;
 
-import com.atowz.global.feign.dto.UserResDto;
+import com.atowz.global.feign.dto.UserResponse;
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.auth.infrastructure.redis.RedisUtil;
 import com.atowz.member.application.MemberService;
@@ -57,7 +57,7 @@ class AuthControllerLogoutTest {
 
     private Member createMemberForLogout() {
         return memberService.createMember(
-                new UserResDto(
+                new UserResponse(
                         "1234",
                         "user1",
                         "img"));

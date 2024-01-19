@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.PRIVATE;
-import static lombok.AccessLevel.PROTECTED;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = PRIVATE)
-public class KakaoUserResDto {
+public class KakaoUserResponse {
 
     private Long id;
-    private UserResDto properties;
+    private UserResponse properties;
 }
