@@ -2,6 +2,7 @@ package com.atowz.auth.infrastructure.jwt;
 
 import com.atowz.auth.domain.dto.TokenRequest;
 import com.atowz.auth.infrastructure.redis.RedisUtil;
+import com.atowz.global.exception.jwt.InvalidJwtException;
 import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.doamin.entity.Member;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.atowz.global.exception.ui.ErrorStatus.JWT_EXPIRED;
+import static com.atowz.global.exception.ui.ErrorStatus.JWT_INVALID;
 
 @Slf4j
 @Service
@@ -62,14 +66,14 @@ public class JwtService {
             return memberQueryService.findById(memberId);
         }
 
-        throw new IllegalArgumentException("만료된 access token.");
+        throw new InvalidJwtException(JWT_EXPIRED);
     }
 
     public void isAccessTokenValid(String accessToken) {
         String value = redisUtil.getValue(accessToken);
 
         if (value != null) {
-            throw new IllegalArgumentException("만료된 access token.");
+            throw new InvalidJwtException(JWT_EXPIRED);
         }
     }
 
@@ -78,7 +82,7 @@ public class JwtService {
         String value = redisUtil.getValue(username);
 
         if (!refreshToken.equals(value))
-            throw new IllegalArgumentException("유효하지 않는 refresh token.");
+            throw new InvalidJwtException(JWT_INVALID);
 
         return memberQueryService.findByUsername(username)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 username."));

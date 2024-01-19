@@ -1,5 +1,6 @@
 package com.atowz.auth.infrastructure.jwt;
 
+import com.atowz.global.exception.jwt.InvalidJwtException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
@@ -13,6 +14,9 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.atowz.global.exception.ui.ErrorStatus.JWT_INVALID;
+import static com.atowz.global.exception.ui.ErrorStatus.JSON_DOSE_NOT_SUPPORT;
 
 @Component
 public class JwtProvider {
@@ -57,7 +61,7 @@ public class JwtProvider {
             return strToMap(body);
 
         } catch (Exception e) {
-            throw new IllegalStateException("유효하지 않은 token.");
+            throw new InvalidJwtException(JWT_INVALID);
         }
     }
 
@@ -65,7 +69,7 @@ public class JwtProvider {
         try {
             return new ObjectMapper().writeValueAsString(claims);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new InvalidJwtException(JSON_DOSE_NOT_SUPPORT);
         }
     }
 
@@ -73,7 +77,7 @@ public class JwtProvider {
         try {
             return new ObjectMapper().readValue(jsonStr, LinkedHashMap.class);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new InvalidJwtException(JWT_INVALID);
         }
     }
 }
