@@ -22,14 +22,14 @@ public class JwtProvider {
     @Value("${jwt.secret}")
     private String secretKeyPlain;
 
-    private SecretKey _getSecretKey() {
+    private SecretKey createSecretKey() {
         String ketBase64Encoded = Base64.getEncoder().encodeToString(secretKeyPlain.getBytes());
         return Keys.hmacShaKeyFor(ketBase64Encoded.getBytes());
     }
 
     public SecretKey getSecretKey() {
         if (cachedSecretKey == null) {
-            cachedSecretKey = _getSecretKey();
+            cachedSecretKey = createSecretKey();
         }
         return cachedSecretKey;
     }
