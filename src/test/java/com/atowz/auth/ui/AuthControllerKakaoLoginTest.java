@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.atowz.auth.ui.AuthBaseTest.setRefreshTokenToRedis;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -28,9 +29,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class AuthControllerKakaoLoginTest extends KakaoClientMock {
 
-    @Autowired MockMvc mvc;
-    @Autowired RedisUtil redisUtil;
-    @Autowired JwtService jwtService;
+    @Autowired
+    MockMvc mvc;
+    @Autowired
+    RedisUtil redisUtil;
+    @Autowired
+    JwtService jwtService;
     @Autowired
     MemberService memberService;
 
@@ -40,22 +44,15 @@ class AuthControllerKakaoLoginTest extends KakaoClientMock {
         requestTokenMocking();
     }
 
-    @AfterEach
-    void rollback() {
-        redisUtil.deleteData("1234");
-    }
-
     @Test
     @DisplayName("kakao api 로 회원가입 성공")
     void no1() throws Exception {
-        ResultActions result = mvc.perform(MockMvcRequestBuilders
-                .get("/api/auth/kakao")
-                .contentType(APPLICATION_JSON)
-                .param("code", "auth Code")
-        ).andDo(print());
-
-
-        result.andExpect(status().is2xxSuccessful())
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/api/auth/kakao")
+                        .contentType(APPLICATION_JSON)
+                        .param("code", "auth Code")
+                )
+                .andExpect(status().is2xxSuccessful())
                 .andExpect(cookie().exists("refreshToken"))
                 .andExpect(header().exists("accessToken"));
 
@@ -66,31 +63,18 @@ class AuthControllerKakaoLoginTest extends KakaoClientMock {
     @Test
     @DisplayName("kakao api 로 로그인 성공")
     void no2() throws Exception {
-        Member member = createMember();
-        redisUtil.setData("1234", "old refresh token", (1000L * 60 * 60 * 24) * 7);
+        setRefreshTokenToRedis(redisUtil, "old refresh token");
 
-        ResultActions result = mvc.perform(MockMvcRequestBuilders
-                .get("/api/auth/kakao")
-                .contentType(APPLICATION_JSON)
-                .param("code", "auth Code")
-        ).andDo(print());
-
-
-        result.andExpect(status().is2xxSuccessful())
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/api/auth/kakao")
+                        .contentType(APPLICATION_JSON)
+                        .param("code", "auth Code")
+                )
+                .andExpect(status().is2xxSuccessful())
                 .andExpect(cookie().exists("refreshToken"))
                 .andExpect(header().exists("accessToken"));
 
         String refreshToken = redisUtil.getValue("1234");
         assertThat(refreshToken).isNotEqualTo("old refresh token");
-    }
-
-
-    private Member createMember() {
-        return memberService.createMember(
-                new UserResponse(
-                        "1234",
-                        "user1",
-                        "img")
-        );
     }
 }

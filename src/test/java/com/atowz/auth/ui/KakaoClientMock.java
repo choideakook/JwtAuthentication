@@ -6,10 +6,13 @@ import com.atowz.global.feign.dto.KakaoTokenResponse;
 import com.atowz.global.feign.dto.KakaoUserResponse;
 import com.atowz.global.feign.dto.UserResponse;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 public class KakaoClientMock {
 
@@ -33,5 +36,12 @@ public class KakaoClientMock {
 
         when(kakaoUserClient.getUser(eq("Bearer kakao access token")))
                 .thenReturn(resDto);
+    }
+
+    public void createMember(MockMvc mvc) throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .get("/api/auth/kakao")
+                .contentType(APPLICATION_JSON)
+                .param("code", "auth Code"));
     }
 }
