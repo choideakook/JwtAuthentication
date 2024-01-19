@@ -1,5 +1,6 @@
 package com.atowz.global.feign.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,9 @@ public class UserResponse {
 
     private String username;
     private String nickname;
-    private String profile_image;
+
+    @JsonProperty("profile_image")
+    private String profileImage;
 
     public void addUsername(Long userId) {
         this.username = String.valueOf(userId);

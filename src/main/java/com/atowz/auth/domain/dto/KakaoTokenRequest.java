@@ -1,5 +1,6 @@
 package com.atowz.auth.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -7,9 +8,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public class KakaoTokenRequest {
 
-    private String grant_type;
-    private String client_id;
-    private String redirect_uri;
-    private String client_secret;
     private String code;
+
+    @JsonProperty("grant_type")
+    private String grantType;
+    @JsonProperty("client_id")
+    private String clientId;
+    @JsonProperty("redirect_uri")
+    private String redirectUri;
+    @JsonProperty("client_secret")
+    private String clientSecret;
 }

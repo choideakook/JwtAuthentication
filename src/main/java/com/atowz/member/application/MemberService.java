@@ -21,7 +21,7 @@ public class MemberService {
         Member member = Member.createKakaoMember(
                 dto.getUsername(),
                 dto.getNickname(),
-                dto.getProfile_image(),
+                dto.getProfileImage(),
                 getRecommendCode());
 
         return memberJpaRepository.save(member);
@@ -29,7 +29,7 @@ public class MemberService {
 
     public Member whenKakaoLogin(UserResponse dto) {
         return this.findByUsername(dto.getUsername())
-                .orElse(this.createMember(dto));
+                .orElseGet(() -> this.createMember(dto));
     }
 
 

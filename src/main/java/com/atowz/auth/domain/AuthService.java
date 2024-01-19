@@ -30,7 +30,7 @@ public class AuthService {
     public UserResponse getUser(String code) {
         KakaoTokenRequest reqDto = new KakaoTokenRequest(grantType, clientId, redirectUri, clientSecret, code);
 
-        String accessToken = tokenClient.getToken(reqDto).getAccess_token();
+        String accessToken = tokenClient.getToken(reqDto).getAccessToken();
         KakaoUserResponse resDto = userClient.getUser(KAKAO_TOKEN_TYPE + accessToken);
 
         UserResponse userDto = resDto.getProperties();
