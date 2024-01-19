@@ -38,4 +38,5 @@ jasypt:
 
 jwt:
   secret: fortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortestfortest
-  expiration-period: 10000
+  access-token-expired-id: 300000
+  refresh-token-expired-id: 300000

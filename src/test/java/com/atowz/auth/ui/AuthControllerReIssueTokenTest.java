@@ -2,7 +2,6 @@ package com.atowz.auth.ui;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.auth.infrastructure.redis.RedisUtil;
-import com.atowz.global.exception.ui.ErrorStatus;
 import com.atowz.member.application.MemberService;
 import jakarta.servlet.http.Cookie;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.atowz.global.exception.ui.ErrorStatus.JWT_EXPIRED;
 import static com.atowz.global.exception.ui.ErrorStatus.JWT_INVALID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;

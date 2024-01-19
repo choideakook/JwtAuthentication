@@ -7,6 +7,7 @@ import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,10 @@ public class JwtService {
     private final RedisUtil redisUtil;
     private final MemberService memberService;
 
-    private final long ACCESS_TOKEN_EXPIRED_IN = (1000L * 60) * 10; // 10 분
-    private final long REFRESH_TOKEN_EXPIRED_IN = (1000L * 60 * 60 * 24) * 7; // 7 일
+    @Value("${jwt.access-token-expired-in}")
+    private long ACCESS_TOKEN_EXPIRED_IN;
+    @Value("${jwt.refresh-token-expired-in}")
+    private long REFRESH_TOKEN_EXPIRED_IN;
 
 
     public HttpHeaders createTokenInHeader(Member member) {
