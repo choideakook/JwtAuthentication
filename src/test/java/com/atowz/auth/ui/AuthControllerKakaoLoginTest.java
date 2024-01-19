@@ -1,8 +1,8 @@
 package com.atowz.auth.ui;
 
-import com.atowz.global.feign.dto.UserResponse;
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.auth.infrastructure.redis.RedisUtil;
+import com.atowz.global.feign.dto.UserResponse;
 import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
 import org.junit.jupiter.api.AfterEach;
@@ -31,7 +31,8 @@ class AuthControllerKakaoLoginTest extends KakaoClientMock {
     @Autowired MockMvc mvc;
     @Autowired RedisUtil redisUtil;
     @Autowired JwtService jwtService;
-    @Autowired MemberService memberService;
+    @Autowired
+    MemberService memberService;
 
     @BeforeEach
     void setup() {

@@ -3,7 +3,7 @@ package com.atowz.auth.infrastructure.jwt;
 import com.atowz.auth.domain.dto.TokenRequest;
 import com.atowz.auth.infrastructure.redis.RedisUtil;
 import com.atowz.global.exception.jwt.InvalidJwtException;
-import com.atowz.member.application.MemberQueryService;
+import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class JwtService {
 
     private final JwtProvider jwtProvider;
     private final RedisUtil redisUtil;
-    private final MemberQueryService memberQueryService;
+    private final MemberService memberService;
 
     private final long ACCESS_TOKEN_EXPIRED_IN = (1000L * 60) * 10; // 10 분
     private final long REFRESH_TOKEN_EXPIRED_IN = (1000L * 60 * 60 * 24) * 7; // 7 일
@@ -63,7 +63,7 @@ public class JwtService {
 
         if (value == null) {
             Long memberId = (long) (Integer) jwtProvider.getClaims(accessToken).get("memberId");
-            return memberQueryService.findById(memberId);
+            return memberService.findById(memberId);
         }
 
         throw new InvalidJwtException(JWT_EXPIRED);
@@ -84,7 +84,7 @@ public class JwtService {
         if (!refreshToken.equals(value))
             throw new InvalidJwtException(JWT_INVALID);
 
-        return memberQueryService.findByUsername(username)
+        return memberService.findByUsername(username)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 username."));
     }
 

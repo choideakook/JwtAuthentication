@@ -2,19 +2,21 @@ package com.atowz.auth.ui;
 
 import com.atowz.auth.domain.AuthService;
 import com.atowz.auth.domain.dto.TokenRequest;
+import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.global.argumentResolver.accessTokenToMember.AccessTokenToMember;
 import com.atowz.global.argumentResolver.getToken.GetToken;
 import com.atowz.global.argumentResolver.refreshTokenToMember.RefreshTokenToMember;
 import com.atowz.global.feign.dto.UserResponse;
-import com.atowz.auth.infrastructure.jwt.JwtService;
-import com.atowz.member.application.MemberQueryService;
 import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,7 +27,6 @@ public class AuthController {
 
     private final AuthService authService;
     private final MemberService memberService;
-    private final MemberQueryService memberQueryService;
     private final JwtService jwtService;
 
     @GetMapping("/kakao")
@@ -70,7 +71,7 @@ public class AuthController {
     }
 
     private Member getMember(UserResponse user) {
-        return memberQueryService.findByUsername(user.getUsername())
+        return memberService.findByUsername(user.getUsername())
                 .orElse(memberService.createMember(user));
     }
 }

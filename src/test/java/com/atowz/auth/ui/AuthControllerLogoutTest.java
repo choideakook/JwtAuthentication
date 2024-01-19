@@ -1,9 +1,8 @@
 package com.atowz.auth.ui;
 
-import com.atowz.global.exception.ui.ErrorStatus;
-import com.atowz.global.feign.dto.UserResponse;
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.auth.infrastructure.redis.RedisUtil;
+import com.atowz.global.feign.dto.UserResponse;
 import com.atowz.member.application.MemberService;
 import com.atowz.member.doamin.entity.Member;
 import jakarta.servlet.http.Cookie;
@@ -15,14 +14,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.atowz.global.exception.ui.ErrorStatus.JWT_INVALID;
 import static com.atowz.global.exception.ui.ErrorStatus.JWT_NOT_FOUND;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
