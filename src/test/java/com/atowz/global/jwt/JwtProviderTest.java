@@ -12,7 +12,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
-@DisplayName("JWT 테스트")
+@DisplayName("통합 : JWT 테스트")
 @SpringBootTest
 class JwtProviderTest {
 

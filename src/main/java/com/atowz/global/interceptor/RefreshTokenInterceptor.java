@@ -1,6 +1,8 @@
 package com.atowz.global.interceptor;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
+import com.atowz.global.exception.jwt.InvalidJwtException;
+import com.atowz.global.exception.ui.ErrorStatus;
 import com.atowz.member.doamin.entity.Member;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static com.atowz.global.exception.ui.ErrorStatus.JWT_INVALID;
+import static com.atowz.global.exception.ui.ErrorStatus.JWT_NOT_FOUND;
 
 @Slf4j
 @Component
@@ -36,12 +43,14 @@ public class RefreshTokenInterceptor implements HandlerInterceptor {
     }
 
     public String getRefreshToken(Cookie[] cookies) {
-        return Arrays.stream(cookies)
+        return Optional.ofNullable(cookies)
+                .map(Arrays::stream)
+                .orElseGet(Stream::empty)
                 .filter(cookie -> refreshTokenKey.equals(cookie.getName()))
                 .findFirst()
                 .map(Cookie::getValue)
                 .orElseThrow(() ->
-                        new IllegalArgumentException("refresh token 이 없음."));
+                        new InvalidJwtException(JWT_NOT_FOUND));
     }
 
 
