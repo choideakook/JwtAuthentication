@@ -3,16 +3,13 @@ package com.atowz.auth.domain;
 import com.atowz.auth.domain.dto.KakaoTokenRequest;
 import com.atowz.global.feign.client.KakaoTokenClient;
 import com.atowz.global.feign.client.KakaoUserClient;
-import com.atowz.global.feign.dto.KakaoTokenResponse;
 import com.atowz.global.feign.dto.KakaoUserResponse;
 import com.atowz.global.feign.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 @Service
 public class AuthService {
 
@@ -30,15 +27,12 @@ public class AuthService {
 
     private final String KAKAO_TOKEN_TYPE = "Bearer ";
 
-    public String getToken(String code) {
+    public UserResponse getUser(String code) {
         KakaoTokenRequest reqDto = new KakaoTokenRequest(grantType, clientId, redirectUri, clientSecret, code);
 
-        KakaoTokenResponse resDto = tokenClient.getToken(reqDto);
-        return resDto.getAccess_token();
-    }
-
-    public UserResponse getUser(String accessToken) {
+        String accessToken = tokenClient.getToken(reqDto).getAccess_token();
         KakaoUserResponse resDto = userClient.getUser(KAKAO_TOKEN_TYPE + accessToken);
+
         UserResponse userDto = resDto.getProperties();
         userDto.addUsername(resDto.getId());
         return userDto;

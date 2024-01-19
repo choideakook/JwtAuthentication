@@ -24,20 +24,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthController {
 
-
     private final AuthService authService;
     private final MemberService memberService;
     private final JwtService jwtService;
 
     @GetMapping("/kakao")
     public ResponseEntity kakaoLogin(@RequestParam("code") String code) {
-        log.info("login 요청 확인 / 인가 code = {}", code);
+        log.info("kakao login 요청 확인");
 
-        String accessToken = authService.getToken(code);
-        log.info("kakao accessToken 조회 성공 : {}", accessToken);
-
-        UserResponse user = authService.getUser(accessToken);
-        Member member = getMember(user);
+        UserResponse user = authService.getUser(code);
+        Member member = memberService.whenKakaoLogin(user);
         HttpHeaders headers = jwtService.createTokenInHeader(member);
 
         log.info("login 성공 / member id = {}", member.getId());
@@ -45,7 +41,6 @@ public class AuthController {
                 .headers(headers)
                 .build();
     }
-
 
     @GetMapping("/reissue-token")
     public ResponseEntity reissueToken(@RefreshTokenToMember Member member) {
@@ -68,10 +63,5 @@ public class AuthController {
         log.info("logout 완료 / member id = {}", member.getId());
         return ResponseEntity.noContent()
                 .build();
-    }
-
-    private Member getMember(UserResponse user) {
-        return memberService.findByUsername(user.getUsername())
-                .orElse(memberService.createMember(user));
     }
 }

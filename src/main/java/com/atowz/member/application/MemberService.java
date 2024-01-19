@@ -27,6 +27,11 @@ public class MemberService {
         return memberJpaRepository.save(member);
     }
 
+    public Member whenKakaoLogin(UserResponse dto) {
+        return this.findByUsername(dto.getUsername())
+                .orElse(this.createMember(dto));
+    }
+
 
     private String getRecommendCode() {
         int recommendCodeLength = 8;
