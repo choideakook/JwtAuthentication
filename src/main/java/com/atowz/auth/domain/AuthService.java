@@ -28,13 +28,13 @@ public class AuthService {
     private final String KAKAO_TOKEN_TYPE = "Bearer ";
 
     public UserResponse getUser(String code) {
-        KakaoTokenRequest reqDto = new KakaoTokenRequest(grantType, clientId, redirectUri, clientSecret, code);
+        KakaoTokenRequest request = new KakaoTokenRequest(grantType, clientId, redirectUri, clientSecret, code);
 
-        String accessToken = tokenClient.getToken(reqDto).getAccessToken();
-        KakaoUserResponse resDto = userClient.getUser(KAKAO_TOKEN_TYPE + accessToken);
+        String accessToken = tokenClient.getToken(request).getAccessToken();
+        KakaoUserResponse response = userClient.getUser(KAKAO_TOKEN_TYPE + accessToken);
 
-        UserResponse userDto = resDto.getProperties();
-        userDto.addUsername(resDto.getId());
-        return userDto;
+        UserResponse userResponse = response.getProperties();
+        userResponse.addUsername(response.getId());
+        return userResponse;
     }
 }

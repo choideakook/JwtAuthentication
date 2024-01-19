@@ -91,10 +91,10 @@ public class JwtService {
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 username."));
     }
 
-    public void expireToken(TokenRequest tokenDto) {
-        redisUtil.setData(tokenDto.getAccessToken(), "is expired", ACCESS_TOKEN_EXPIRED_IN);
+    public void expireToken(TokenRequest tokenRequest) {
+        redisUtil.setData(tokenRequest.getAccessToken(), "is expired", ACCESS_TOKEN_EXPIRED_IN);
         redisUtil.deleteData((String) jwtProvider
-                .getClaims(tokenDto.getRefreshToken())
+                .getClaims(tokenRequest.getRefreshToken())
                 .get("username"));
     }
 }

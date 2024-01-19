@@ -2,7 +2,6 @@ package com.atowz.global.interceptor;
 
 import com.atowz.auth.infrastructure.jwt.JwtService;
 import com.atowz.global.exception.jwt.InvalidJwtException;
-import com.atowz.global.exception.ui.ErrorStatus;
 import com.atowz.member.doamin.entity.Member;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static com.atowz.global.exception.ui.ErrorStatus.JWT_INVALID;
 import static com.atowz.global.exception.ui.ErrorStatus.JWT_NOT_FOUND;
 
 @Slf4j

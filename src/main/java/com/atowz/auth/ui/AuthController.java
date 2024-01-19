@@ -55,10 +55,10 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity logout(@GetToken TokenRequest tokenDto, @AccessTokenToMember Member member) {
+    public ResponseEntity logout(@GetToken TokenRequest tokenRequest, @AccessTokenToMember Member member) {
         log.info("logout 요청 확인");
 
-        jwtService.expireToken(tokenDto);
+        jwtService.expireToken(tokenRequest);
 
         log.info("logout 완료 / member id = {}", member.getId());
         return ResponseEntity.noContent()

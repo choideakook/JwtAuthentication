@@ -17,19 +17,19 @@ public class MemberService {
 
     private final MemberJpaRepository memberJpaRepository;
 
-    public Member createMember(UserResponse dto) {
+    public Member createMember(UserResponse response) {
         Member member = Member.createKakaoMember(
-                dto.getUsername(),
-                dto.getNickname(),
-                dto.getProfileImage(),
+                response.getUsername(),
+                response.getNickname(),
+                response.getProfileImage(),
                 getRecommendCode());
 
         return memberJpaRepository.save(member);
     }
 
-    public Member whenKakaoLogin(UserResponse dto) {
-        return this.findByUsername(dto.getUsername())
-                .orElseGet(() -> this.createMember(dto));
+    public Member whenKakaoLogin(UserResponse response) {
+        return this.findByUsername(response.getUsername())
+                .orElseGet(() -> this.createMember(response));
     }
 
 
