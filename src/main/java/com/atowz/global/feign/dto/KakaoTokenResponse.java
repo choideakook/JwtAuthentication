@@ -7,7 +7,7 @@ import lombok.Getter;
 public class KakaoTokenResponse {
 
     @JsonProperty("token_type")
-    private String tokenType;
+    private String token_type;
     @JsonProperty("access_token")
     private String accessToken;
     @JsonProperty("expires_in")
