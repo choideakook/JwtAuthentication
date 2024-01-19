@@ -38,7 +38,7 @@ public class KakaoClientMock {
                 .thenReturn(resDto);
     }
 
-    public void createMember(MockMvc mvc) throws Exception {
+    public void kakaoLogin(MockMvc mvc) throws Exception {
         mvc.perform(MockMvcRequestBuilders
                 .get("/api/auth/kakao")
                 .contentType(APPLICATION_JSON)
