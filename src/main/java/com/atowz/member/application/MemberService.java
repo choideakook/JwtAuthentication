@@ -17,6 +17,13 @@ public class MemberService {
 
     private final MemberJpaRepository memberJpaRepository;
 
+    private final int RECOMMEND_CODE_LENGTH = 8;
+
+    public Member whenKakaoLogin(UserResponse response) {
+        return this.findByUsername(response.getUsername())
+                .orElseGet(() -> this.createMember(response));
+    }
+
     public Member createMember(UserResponse response) {
         Member member = Member.createKakaoMember(
                 response.getUsername(),
@@ -27,22 +34,14 @@ public class MemberService {
         return memberJpaRepository.save(member);
     }
 
-    public Member whenKakaoLogin(UserResponse response) {
-        return this.findByUsername(response.getUsername())
-                .orElseGet(() -> this.createMember(response));
-    }
-
-
     private String getRecommendCode() {
-        int recommendCodeLength = 8;
-
         String recommendCode = UUID.randomUUID()
                 .toString()
-                .substring(0, recommendCodeLength);
+                .substring(0, RECOMMEND_CODE_LENGTH);
 
-        if (memberJpaRepository.existsByRecommendCode(recommendCode))
+        if (memberJpaRepository.existsByRecommendCode(recommendCode)) {
             return getRecommendCode();
-
+        }
         return recommendCode;
     }
 

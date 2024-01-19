@@ -3,6 +3,7 @@ package com.atowz.auth.domain;
 import com.atowz.auth.domain.dto.KakaoTokenRequest;
 import com.atowz.global.feign.client.KakaoTokenClient;
 import com.atowz.global.feign.client.KakaoUserClient;
+import com.atowz.global.feign.dto.KakaoTokenResponse;
 import com.atowz.global.feign.dto.KakaoUserResponse;
 import com.atowz.global.feign.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,8 @@ public class AuthService {
     public UserResponse getUser(String code) {
         KakaoTokenRequest request = new KakaoTokenRequest(grantType, clientId, redirectUri, clientSecret, code);
 
-        String accessToken = tokenClient.getToken(request).getAccessToken();
+        KakaoTokenResponse accessTokenResponse = tokenClient.getToken(request);
+        String accessToken = accessTokenResponse.getAccessToken();
         KakaoUserResponse response = userClient.getUser(KAKAO_TOKEN_TYPE + accessToken);
 
         UserResponse userResponse = response.getProperties();

@@ -38,7 +38,7 @@ public class Member {
     @CollectionTable(name = "member_profile_img", joinColumns = @JoinColumn(name = "member_id"))
     private List<String> profileImg = new ArrayList<>();
 
-    @Enumerated (STRING)
+    @Enumerated(STRING)
     private MemberStatus status;
 
     @Embedded
@@ -49,7 +49,6 @@ public class Member {
 
     @Embedded
     private Exam exam;
-
 
     public static Member createKakaoMember(String username, String nickname, String profileImg, String recommendCode) {
         Member member = builder()
