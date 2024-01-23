@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.restdocs.headers.HeaderDocumentation;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import static com.atowz.global.exception.ui.ErrorStatus.JWT_INVALID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.restdocs.cookies.CookieDocumentation.cookieWithName;
-import static org.springframework.restdocs.cookies.CookieDocumentation.requestCookies;
+import static org.springframework.restdocs.cookies.CookieDocumentation.*;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -65,8 +67,11 @@ class AuthControllerReIssueTokenTest extends KakaoClientMock {
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestCookies(
-                                cookieWithName("refreshToken").description("set refresh token")
-                        )
+                                cookieWithName("refreshToken").description("set refresh token")),
+                        responseCookies(
+                                cookieWithName("refreshToken").description("new refresh token")),
+                        responseHeaders(
+                                headerWithName("accessToken").description("new access token"))
                 ));
 
         String newRefreshToken = redisUtil.getValue("1234");
