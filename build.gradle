@@ -24,6 +24,7 @@ repositories {
 
 ext {
     set('snippetsDir', file("build/generated-snippets"))
+    set('springCloudVersion', "2023.0.0")
 }
 
 configurations {
@@ -31,6 +32,12 @@ configurations {
         extendsFrom annotationProcessor
     }
     asciidoctorExt
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 dependencies {
@@ -42,6 +49,8 @@ dependencies {
     // db
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'it.ozimov:embedded-redis:0.7.2'
 
     // flyway
     implementation 'org.flywaydb:flyway-core'
@@ -49,6 +58,9 @@ dependencies {
 
     // lombok
     annotationProcessor 'org.projectlombok:lombok'
+
+    //feign
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -85,6 +97,11 @@ tasks.withType(JavaCompile) {
 clean.doLast {
     file(generated).deleteDir()
 }
+
+clean {
+    delete file('src/main/generated')
+}
+
 
 tasks.named('test') {
     outputs.dir snippetsDir

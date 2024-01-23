@@ -1,0 +1,14 @@
+= Auth API 문서
+:doctype: auth
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+
+== JWT 재발급
+=== Request
+
+include::{snippets}/reissue_token/http-request.adoc[]
+
+
+=== Response

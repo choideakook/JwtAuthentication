@@ -11,5 +11,6 @@ jasypt:
     password: ${ENCRYPT_KEY}
 
 jwt:
-  secret: ENC(t6iKCv1Nj+ygRxG2oZCw3l4v9y0ALS2GfQwYIKvO0tRuPzFp4UYRZYfBFdBW+xQl77rOLbfIPJ13tys/tXj3Qw==)
-  expiration-period: ENC(Ua9DcFiPKX/5r0/WGkN5JQ==)
+  secret: ENC(UcA03YtOpb+AX2NfSRn2H5TsGwt0QGlMb+9BnCmMfh/+y9gG1INzDPzt36kMWuwJ6jcbnsG4pgFiZpuAciDzS2h5wsvL2NqBb6mXuFWPCjUJ8NEx+xyqt4RcQclXAF98)
+  access-token-expired-in: 604800000
+  refresh-token-expired-in: 600000
