@@ -4,12 +4,14 @@ import com.atowz.global.feign.dto.UserResponse;
 import com.atowz.member.doamin.entity.Member;
 import com.atowz.member.infrastructure.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 @Service
