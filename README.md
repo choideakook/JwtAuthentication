@@ -3,7 +3,9 @@
 ## 소프트웨어 내부 아키택처
 - `interceptor` 계층에서 JWT 의 유효성 검사를 진행합니다.
 - `HandlerMethodArgumentResolver` 계층에서 JWT 에서 회원 객체를 조회해 `Controller` 계층으로 전달합니다.
-![스크린샷 2024-01-29 오후 4.53.01.png](..%2F..%2F..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-01-29%20%EC%98%A4%ED%9B%84%204.53.01.png)
+
+<img width="818" alt="아키택처" src="https://github.com/choideakook/Jwt_Authentication/assets/115536240/5bb16d5f-62f3-42ad-a4c0-9dd7ecf01e1b">
+
 
 ## 핵심 기능
 ### 0. 개요
